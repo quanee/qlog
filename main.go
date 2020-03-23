@@ -60,7 +60,7 @@ func main() {
 	r.GET("/about", handler.About)
 	r.GET("/post/*", handler.Post)
 	//r.GET("/edit", handler.Edit)
-	r.GET("/demo", handler.Demo)
+	//r.GET("/demo", handler.Demo)
 	r.GET("/article", handler.GetArticle)
 	r.GET("/search/*", handler.Search)
 	r.POST("/search/*", handler.Search)
