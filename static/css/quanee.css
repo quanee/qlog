@@ -185,7 +185,7 @@ body {
     border-radius: 4px;
 }
 
-a:link {
+/*a:link {
     color: var(--black);
     text-decoration: none;
 }
@@ -203,12 +203,12 @@ a:hover {
 a:active {
     color: var(--black);
     text-decoration: none;
-}
+}*/
 
 
 /* wave */
 .waves {
-    border-radius: 4px;
+    /*border-radius: 4px;*/
     display: inline-block;
     outline: none;
     border: 0;
@@ -217,11 +217,21 @@ a:active {
     opacity: 0.9;
     text-align: center;
     padding: .4em .8em;
+    /*width: 100%;*/
+    border-bottom: solid 4px #0a001f;
+    text-decoration: none;
 }
 
-.waves:hover {
-    opacity: 1;
-    box-shadow: rgba(0, 0, 0, .3) 0 1px 2px 0, rgba(0, 0, 0, .15) 0 1px 3px 1px;
+.waves::after{
+    /*width: 0;*/
+    transform: scaleX(0);
+}
+
+.waves:hover::after {
+    /*width: 100%;*/
+    transform: scaleX(1);
+    /*opacity: 1;*/
+    /*box-shadow: rgba(0, 0, 0, .3) 0 1px 2px 0, rgba(0, 0, 0, .15) 0 1px 3px 1px;*/
 }
 
 .waves-effect {
@@ -254,7 +264,6 @@ a:active {
         opacity: 0;
     }
 }
-
 /* end wave */
 
 /* back top */
@@ -333,7 +342,7 @@ a:active {
 
 /* page footer */
 .footer {
-    background-color: var(--light-bg);
+    /*background-color: var(--light-bg);*/
     color: var(--black);
     height: 2rem;
     border-radius: 0 0 4px 4px;
@@ -369,6 +378,31 @@ a:active {
 .read-all {
     right: 0;
     position: absolute;
+    display: inline-block;
+}
+
+.underline {
+    display: inline-block;
+    position: relative;
+    height: 2rem;
+}
+
+.underline::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 4px;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    transform-origin: bottom left;
+    transition: transform 300ms ease-out;
+}
+
+.underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
 
 .entry-footer {
@@ -476,6 +510,16 @@ a:active {
     /*text-decoration: underline;*/
     /*transform: translate(.5rem, 0);*/
     /*transform: translate(.5rem, 0);*/
+}
+
+.entry-tags {
+    display: inline-block;
+    padding: 1rem 0;
+    font-size: 1.5rem;
+}
+
+.entry-tag {
+    padding-right: 1rem;
 }
 
 .main-navigation {
@@ -1264,7 +1308,7 @@ a:active {
     }
 
     .footer {
-        background-color: var(--dark-bg);
+        /*background-color: var(--dark-bg);*/
         color: var(--dark-fg);
     }
 
@@ -1403,7 +1447,7 @@ a:active {
     }
 
     .footer {
-        background-color: var(--dark-fg);
+        /*background-color: var(--dark-fg);*/
         color: var(--black);
     }
 
