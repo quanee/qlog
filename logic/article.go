@@ -64,7 +64,6 @@ func QueryAllSummary(db *sql.DB) ([]model.Summary, error) {
 // query summary by limit and offset
 func QueryLimitSummary(db *sql.DB, id, limit string) ([]model.Summary, error) {
 	var res []model.Summary
-
 	//Cache.Query()
 	ql := fmt.Sprintf("SELECT id, title, abstract, created_time FROM summary ORDER BY created_time DESC LIMIT %s OFFSET %s", limit, id)
 	log.Debug(ql)
@@ -88,6 +87,21 @@ func QueryLimitSummary(db *sql.DB, id, limit string) ([]model.Summary, error) {
 			log.Error("Parser time error ")
 		}
 		summary.CreatedTime = fmt.Sprint(timeParse.Format("02 Jan 06"))
+		tags, err := db.Query(fmt.Sprintf("SELECT tag FROM tags WHERE tags.id IN (SELECT tag_id FROM tsid WHERE tsid.summary_id=%s);", summary.SId))
+		if err != nil {
+			log.Error("Query tags error ")
+		}
+		tagsarr := make([]string, 0)
+		for tags.Next() {
+			tag := ""
+			err = tags.Scan(&tag)
+			if err != nil {
+				log.Error("Query tags error ")
+			}
+			tagsarr = append(tagsarr, tag)
+		}
+		summary.Tags = tagsarr
+
 		res = append(res, summary)
 		//serres, err := json.Marshal(summary)
 		//if err != nil {
