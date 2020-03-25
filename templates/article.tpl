@@ -13,7 +13,14 @@
                 {{ $v.Abstract }}
             </p>
             <footer class="entry-footer">
-                <a class="waves read-all" rel="full-article" href="/post/{{ $v.SId }}">READ MORE</a>
+                <div class="entry-tags">
+                    {{ range $s, $t := $v.Tags }}
+                        <a class="entry-tag" href="/tags/{{ $t }}"><span>{{ $t }}</span></a>
+                    {{ end }}
+                </div>
+                <a class="read-all" rel="full-article" href="/post/{{ $v.SId }}">
+                    <p class="underline">READ ALL</p>
+                </a>
             </footer>
         </article>
     {{ end }}
