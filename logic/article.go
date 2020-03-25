@@ -64,7 +64,9 @@ func QueryAllSummary(db *sql.DB) ([]model.Summary, error) {
 // query summary by limit and offset
 func QueryLimitSummary(db *sql.DB, id, limit string) ([]model.Summary, error) {
 	var res []model.Summary
-	ql := fmt.Sprintf("SELECT id, title, abstract, created_time FROM summary ORDER BY created_time LIMIT %s OFFSET %s", limit, id)
+
+	//Cache.Query()
+	ql := fmt.Sprintf("SELECT id, title, abstract, created_time FROM summary ORDER BY created_time DESC LIMIT %s OFFSET %s", limit, id)
 	log.Debug(ql)
 	rows, err := db.Query(ql)
 	defer func() {
@@ -87,6 +89,15 @@ func QueryLimitSummary(db *sql.DB, id, limit string) ([]model.Summary, error) {
 		}
 		summary.CreatedTime = fmt.Sprint(timeParse.Format("02 Jan 06"))
 		res = append(res, summary)
+		//serres, err := json.Marshal(summary)
+		//if err != nil {
+		//	log.Error("json.Marshal error ", err)
+		//}
+		//reply, err := database.RedisDB.Do("SET", summary.SId, serres)
+		//if err != nil {
+		//	log.Error("Redis Set key error ", err)
+		//}
+		//log.Info("set key reply ", reply)
 	}
 	return res, nil
 }
