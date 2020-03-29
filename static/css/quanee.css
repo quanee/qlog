@@ -222,7 +222,7 @@ a:active {
     text-decoration: none;
 }
 
-.waves::after{
+.waves::after {
     /*width: 0;*/
     transform: scaleX(0);
 }
@@ -264,6 +264,7 @@ a:active {
         opacity: 0;
     }
 }
+
 /* end wave */
 
 /* back top */
@@ -336,6 +337,7 @@ a:active {
 
 .nav-item {
     width: 40px;
+    text-decoration: none;
 }
 
 /* nav end */
@@ -520,6 +522,7 @@ a:active {
 
 .entry-tag {
     padding-right: 1rem;
+    text-decoration: none;
 }
 
 .main-navigation {
@@ -1364,6 +1367,10 @@ a:active {
     .search {
         color: rgba(255, 255, 255, .5);
     }
+
+    .underline::after {
+        background-color: var(--dark-fg);
+    }
 }
 
 @media (prefers-color-scheme: light) {
@@ -1497,6 +1504,10 @@ a:active {
 
     .search {
         color: rgba(0, 0, 0, .5);
+    }
+
+    .underline::after {
+        background-color: var(--light-fg);
     }
 }
 
