@@ -1,34 +1,26 @@
 package md2html
 
 import (
-	"bytes"
-	"github.com/yuin/goldmark"
-	"github.com/yuin/goldmark/extension"
-	"github.com/yuin/goldmark/parser"
-	"github.com/yuin/goldmark/renderer/html"
+	"fmt"
+	"github.com/88250/lute"
+	"github.com/shurcooL/github_flavored_markdown"
+	"gitlab.com/golang-commonmark/markdown"
 )
 
-var md goldmark.Markdown
-
-func init() {
-	md = goldmark.New(
-		goldmark.WithExtensions(extension.GFM),
-		goldmark.WithParserOptions(
-			parser.WithAutoHeadingID(),
-		),
-		goldmark.WithRendererOptions(
-			html.WithHardWraps(),
-			html.WithXHTML(),
-		),
-	)
+func MD2HTMLlute(markdown []byte) (string, error) {
+	luteEngine := lute.New() // 默认已经启用 GFM 支持以及中文语境优化
+	html := luteEngine.Markdown("demo", markdown)
+	return string(html), nil
 }
 
-func MD2HTML(markdown string) (string, error) {
-	source := []byte(markdown)
-	var buf bytes.Buffer
-	if err := md.Convert(source, &buf); err != nil {
-		return "", err
+func MD2HTML(markdowns []byte) (string, error) {
+	md := markdown.New(markdown.XHTMLOutput(true))
+	for _, tok := range md.Parse(markdowns) {
+		fmt.Println(tok.Tag())
 	}
+	return md.RenderToString(markdowns), nil
+}
 
-	return buf.String(), nil
+func MD2HTMLbl(markdown []byte) (string, error) {
+	return string(github_flavored_markdown.Markdown(markdown)), nil
 }
