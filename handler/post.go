@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"errors"
 	"github.com/quanee/draft"
 	"github.com/quanee/qlog/database"
 	"github.com/quanee/qlog/logic"
@@ -10,8 +9,8 @@ import (
 	"github.com/quanee/qlog/utils/md2html"
 	"net/http"
 	"os"
-	"strconv"
 	"strings"
+	"unsafe"
 )
 
 func Post(context *draft.Context) {
@@ -20,32 +19,26 @@ func Post(context *draft.Context) {
 	id := context.QueryParam("param")
 	article := logic.QueryOneArticleById(database.DB, id)
 
-	substance, err := md2html.MD2HTML(article.Substance)
+	substance, err := md2html.MD2HTML(StrToBytes(article.Substance))
 	if err != nil {
 		log.Error("md2html error :", err)
 	}
 	article.Substance = substance
 
-	//var pre, next string
-	//if id == "1" {
-	//	next = ""
-	//} else {
-	//	next = idInc(id, -1)
-	//}
-	//pre = idInc(id, 1)
 	context.HTML(http.StatusOK, "post.tpl", draft.H{
 		"article": article,
 		"env":     os.Getenv("ENV"),
 		"title":   article.Title,
-		//"pre": pre,
-		//"next": next,
 	})
 }
 
-func idInc(id string, dea int) string {
-	iid, err := strconv.Atoi(id)
-	if err != nil {
-		log.Error(errors.New("string convert to int error"))
-	}
-	return strconv.Itoa(iid + dea)
+func BytesToStr(bytes []byte) string {
+	return *(*string)(unsafe.Pointer(&bytes))
+}
+
+// StrToBytes 快速转换 string 为 []byte。
+func StrToBytes(str string) []byte {
+	x := (*[2]uintptr)(unsafe.Pointer(&str))
+	h := [3]uintptr{x[0], x[1], x[1]}
+	return *(*[]byte)(unsafe.Pointer(&h))
 }
