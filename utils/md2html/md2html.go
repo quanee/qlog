@@ -3,7 +3,6 @@ package md2html
 import (
 	"fmt"
 	"github.com/88250/lute"
-	"github.com/shurcooL/github_flavored_markdown"
 	"gitlab.com/golang-commonmark/markdown"
 )
 
@@ -21,6 +20,6 @@ func MD2HTML(markdowns []byte) (string, error) {
 	return md.RenderToString(markdowns), nil
 }
 
-func MD2HTMLbl(markdown []byte) (string, error) {
-	return string(github_flavored_markdown.Markdown(markdown)), nil
-}
+//func MD2HTMLbl(markdown []byte) (string, error) {
+//	return string(github_flavored_markdown.Markdown(markdown)), nil
+//}
