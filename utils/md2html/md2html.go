@@ -1,7 +1,6 @@
 package md2html
 
 import (
-	"fmt"
 	"github.com/88250/lute"
 	"gitlab.com/golang-commonmark/markdown"
 )
@@ -14,9 +13,9 @@ func MD2HTMLlute(markdown []byte) (string, error) {
 
 func MD2HTML(markdowns []byte) (string, error) {
 	md := markdown.New(markdown.XHTMLOutput(true))
-	for _, tok := range md.Parse(markdowns) {
-		fmt.Println(tok.Tag())
-	}
+	//for _, tok := range md.Parse(markdowns) {
+	//	fmt.Println(tok.Tag())
+	//}
 	return md.RenderToString(markdowns), nil
 }
 
