@@ -1,14 +1,13 @@
 package md2html
 
-import (
-	"github.com/russross/blackfriday"
-)
+import "github.com/88250/lute"
 
-//func MD2HTMLlute(markdown []byte) (string, error) {
-//	luteEngine := lute.New() // 默认已经启用 GFM 支持以及中文语境优化
-//	html := luteEngine.Markdown("big", markdown)
-//	return string(html), nil
-//}
+func MD2HTML(markdown []byte) (string, error) {
+	luteEngine := lute.New() // 默认已经启用 GFM 支持以及中文语境优化
+	html := luteEngine.Markdown("big", markdown)
+	return string(html), nil
+}
+
 //
 //func MD2HTML(markdowns []byte) (string, error) {
 //	md := markdown.New(markdown.XHTMLOutput(true))
@@ -18,7 +17,7 @@ import (
 //	return md.RenderToString(markdowns), nil
 //}
 
-func MD2HTML(markdown []byte) (string, error) {
-	output := blackfriday.Run(markdown)
-	return string(output), nil
-}
+//func MD2HTML(markdown []byte) (string, error) {
+//	output := blackfriday.Run(markdown)
+//	return string(output), nil
+//}
