@@ -18,7 +18,7 @@ import (
 //	return md.RenderToString(markdowns), nil
 //}
 
-func MD2HTMLbl(markdown []byte) (string, error) {
+func MD2HTML(markdown []byte) (string, error) {
 	output := blackfriday.Run(markdown)
 	return string(output), nil
 }
