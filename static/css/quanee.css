@@ -1109,7 +1109,7 @@ a:active {
 
 .search-outline {
     float: right;
-    background: rgba(255, 255, 255, .8);
+    background: var(--light-bg);
     display: flex;
     border: 1px solid rgba(34, 35, 33, .3);
     box-shadow: none;
@@ -1499,7 +1499,7 @@ a:active {
     }
 
     .search-outline {
-        background: rgba(230, 230, 230, .8);
+        background: var(--light-bg);
     }
 
     .search {
