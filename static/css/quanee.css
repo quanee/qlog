@@ -184,7 +184,9 @@ body {
     position: relative;
     border-radius: 4px;
 }
-
+.not-found-font {
+    color: var(--light-bg);
+}
 /*a:link {
     color: var(--black);
     text-decoration: none;
@@ -1088,8 +1090,11 @@ a:active {
         transform: translateY(1.25rem);
     }
 }
-
 /* end loading */
+
+/*.dark-not-found {
+    display: none;
+}*/
 
 .search-input {
     background-color: transparent;
@@ -1371,6 +1376,14 @@ a:active {
     .underline::after {
         background-color: var(--dark-fg);
     }
+
+    .dark-not-found {
+        display: none;
+    }
+
+    .not-found-font {
+        color: var(--light-bg);
+    }
 }
 
 @media (prefers-color-scheme: light) {
@@ -1508,6 +1521,14 @@ a:active {
 
     .underline::after {
         background-color: var(--light-fg);
+    }
+
+    .light-not-found {
+        display: none;
+    }
+
+    .not-found-font {
+        color: var(--black);
     }
 }
 
