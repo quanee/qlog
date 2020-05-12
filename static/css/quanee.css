@@ -1160,13 +1160,18 @@ a:active {
     }
 
     .entry-title {
-        font-size: 3.6rem;
+        font-size: 1.6rem;
         margin: .5rem 0;
     }
 
     .iarticle {
+        margin: 1rem 0;
         padding: .5rem 1.8rem;
         line-height: 1.4;
+        -webkit-box-shadow: rgba(0, 0, 0, 0) 0 1px 2px 0, rgba(0, 0, 0, 0) 0 1px 3px 1px;
+        -moz-box-shadow: rgba(0, 0, 0, 0) 0 1px 2px 0, rgba(0, 0, 0, 0) 0 1px 3px 1px;
+        box-shadow: rgba(0, 0, 0, 0) 0 1px 2px 0, rgba(0, 0, 0, 0) 0 1px 3px 1px;
+        height: 200px;
     }
 
     .article {
@@ -1188,13 +1193,9 @@ a:active {
     }
 
     .index-entry-content {
-        font-size: .9em;
+        font-size: 1rem;
         -webkit-line-clamp: 4;
         line-height: 1.7em;
-    }
-
-    .iarticle {
-        margin: 1rem 0;
     }
 
     .meta {
@@ -1203,6 +1204,18 @@ a:active {
 
     .entry-footer {
         bottom: 3rem;
+    }
+
+    .underline {
+        font-size: 1.2rem;
+    }
+
+    .datetime {
+        font-size: 1.2rem;
+    }
+
+    .entry-tag {
+        font-size: 1.2rem;
     }
 }
 
