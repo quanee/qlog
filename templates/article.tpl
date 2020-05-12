@@ -15,7 +15,7 @@
             <footer class="entry-footer">
                 <div class="entry-tags">
                     {{ range $s, $t := $v.Tags }}
-                        <a class="entry-tag" href="/tags/{{ $t }}"><span>{{ $t }}</span></a>
+                        <a class="entry-tag" href="/tags/{{ $t }}"><span>#{{ $t }}</span></a>
                     {{ end }}
                 </div>
                 <a class="read-all" rel="full-article" href="/post/{{ $v.SId }}">
