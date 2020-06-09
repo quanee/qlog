@@ -1,0 +1,119 @@
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.tabl {
+    margin: 0 auto;
+    border: 0;
+    border-collapse: collapse;
+}
+
+.tbod {
+    background-color: rgba(23, 234, 123, 1);
+    border-collapse: collapse;
+    border-bottom: 1px;
+}
+
+tbody>tr:nth-child(even) {
+    background: rgba(238, 211, 210, 1);
+}
+
+tbody>tr:nth-child(odd) {
+    background: rgba(128, 211, 210, 1);
+}
+
+.thea {
+    background-color: rgba(234, 244, 23, 1);
+    border-collapse: collapse;
+}
+
+.thead-tr {
+}
+
+.thead-th {
+}
+
+.expandingArea {
+    position: relative;
+}
+
+#edit-textarea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    resize: none;
+    overflow: auto;
+    background-color: #fff;
+}
+
+#pre-span {
+    display: block;
+    visibility: hidden;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.contextpre {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.2;
+    min-width: 702px;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    margin: 0;
+    padding: 0;
+}
+
+.edit-body {
+    background-color: #fff;
+    max-width: 702px;
+    width: 100%;
+    margin: 3rem auto 1rem auto;
+    position: relative;
+    border-radius: 4px;
+}
+
+.edit-title {
+    font-size: 32px;
+    line-height: 1.4;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.edit-title-area {
+    margin-bottom: 20px;
+}
+
+.toolbar {
+    list-style-type: none;
+    min-height: 40px;
+    background-color: #d9d9d9;
+    font-size: 16px;
+    padding: 0;
+}
+
+.toolbar li {
+    float: left;
+    padding: 9.5px 14px;
+}
+
+.toolbar li:hover {
+    cursor: pointer;
+    background-color: #595959;
+    color: #d9d9d9;
+}
