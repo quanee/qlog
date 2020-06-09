@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/quanee/draft"
+	"github.com/quanee/qlog/admin/ahandler"
 	"github.com/quanee/qlog/handler"
 	"github.com/quanee/qlog/middleware"
 	"html/template"
@@ -65,41 +66,17 @@ func main() {
 	r.GET("/search/*", handler.Search)
 	r.POST("/search/*", handler.Search)
 	r.GET("/", handler.Index)
+	//r.GET("/admin/posts", ahandler.Posts)
 
-	/*v1 := r.Group("/v1")
-	{
-		v1.GET("/", func(c *draft.Context) {
-			c.HTML(http.StatusOK, "", "<h1>Hello draft</h1>")
-		})
+	admin := r.Group("/admin")
+	admin.Use()
+	admin.GET("/posts", ahandler.Posts)
+	admin.GET("/edit/*", ahandler.Edit)
+	admin.PUT("/put", ahandler.Modify)
+	admin.GET("/writer", ahandler.Writer)
 
-		v1.GET("/hello", func(c *draft.Context) {
-			// expect /hello?name=quanee
-			c.String(http.StatusOK, "hello %s, you're at %s\n", c.Query("name"), c.Path)
-		})
-	}
-	v2 := r.Group("/v2")
-	{
-		v2.GET("/hello/:name", func(c *draft.Context) {
-			// expect /hello/quanee
-			c.String(http.StatusOK, "hello %s, you're at %s\n", c.Param("name"), c.Path)
-		})
-		v2.POST("/login", func(c *draft.Context) {
-			c.JSON(http.StatusOK, draft.H{
-				"username": c.PostForm("username"),
-				"password": c.PostForm("password"),
-			})
-		})
-	}
-	v2.Use(onlyForV2()) // v2 group middleware
-	{
-		v2.GET("/hello/:name", func(c *draft.Context) {
-			// expect /hello/quanee
-			c.String(http.StatusOK, "hello %s, you're at %s\n", c.Param("name"), c.Path)
-		})
-	}*/
-
-	//err := r.Run(":9999")
-	err := r.RunTLS(":"+os.Getenv("DRAFT_PORT"), "server.crt", "server.key")
+	//err := r.RunTLS(":"+os.Getenv("DRAFT_PORT"), "server.crt", "server.key")
+	err := r.RunTLS(":8080", "server.crt", "server.key")
 	if err != nil {
 		log.Print("start server error: ", err)
 	}
