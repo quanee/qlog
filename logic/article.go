@@ -15,7 +15,7 @@ func Publish(db *sql.DB, article *model.Article) error {
 		log.Error("tx err ", err)
 		return err
 	}
-	ql := fmt.Sprintf("INSERT INTO summary (title, abstract, created_time) VALUES (%s, %s, %s)", article.Title, article.Abstract, article.CreatedTime)
+	ql := fmt.Sprintf("INSERT INTO summary (title, abstract, created_time) VALUES ('%s', '%s', '%s')", article.Title, article.Abstract, article.CreatedTime)
 	res, err := tx.Exec(ql)
 	if err != nil {
 		log.Error("insert summary err ", err)
@@ -28,7 +28,7 @@ func Publish(db *sql.DB, article *model.Article) error {
 		tx.Rollback()
 		return err
 	}
-	ql = fmt.Sprintf("INSERT INTO content (id, substance) VALUES (%d, %s)", id, article.Substance)
+	ql = fmt.Sprintf("INSERT INTO content (id, substance) VALUES (%d, '%s')", id, article.Substance)
 	_, err = tx.Exec(ql)
 	if err != nil {
 		log.Error("insert content err ", err)
@@ -134,16 +134,16 @@ func QueryOneArticleById(db *sql.DB, id string) model.Article {
 }
 
 // modify article
-func ModifyArticle(db *sql.DB, article model.Article) error {
+func ModifyArticle(db *sql.DB, article *model.Article) error {
 	tx, err := db.Begin()
 	if err != nil {
 		log.Error("tx err ", err)
 		return err
 	}
-	ql := fmt.Sprintf("UPDATE content SET substance=%s WHERE id=%s", article.Substance, article.CId)
+	ql := fmt.Sprintf("UPDATE content SET substance='%s' WHERE id='%s'", article.Substance, article.CId)
 	result, err := tx.Exec(ql)
 	result.RowsAffected()
-	ql = fmt.Sprintf("UPDATE summary SET title=%s, abstract=%s, updated_time=%s WHERE id=%s", article.Title, article.Abstract, article.UpdatedTime, article.SId)
+	ql = fmt.Sprintf("UPDATE summary SET title='%s', abstract='%s', updated_time='%s' WHERE id='%s'", article.Title, article.Abstract, article.UpdatedTime, article.SId)
 	result, err = tx.Exec(ql)
 
 	return nil
