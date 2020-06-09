@@ -25,8 +25,8 @@
                 </div>
             </div>
         </div>
-        {{ template "footer.tpl" }}
     </div>
+    {{ template "footer.tpl" }}
     </body>
     {{ if eq .env "release" }}
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
