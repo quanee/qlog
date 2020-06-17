@@ -1,12 +1,12 @@
-{{ define "4xx.tpl" }}
+{{ define "blog/4xx.tpl" }}
     <!DOCTYPE html>
     <html lang="en">
     <head>
-        <link rel="stylesheet" type="text/css" href="../static/css/quanee.css"/>
-        {{ template "header.tpl" . }}
+        <link rel="stylesheet" type="text/css" href="/static/blog/css/quanee.css"/>
+        {{ template "blog/header.tpl" . }}
     </head>
     <body>
-    {{ template "nav.tpl" . }}
+    {{ template "blog/nav.tpl" . }}
     <div class="body" id="body">
         <div id="main">
             <div id="content">
@@ -684,7 +684,7 @@
                 </div>
             </div>
         </div>
-        {{ template "footer.tpl" }}
+        {{ template "blog/footer.tpl" }}
     </div>
     </body>
     </html>

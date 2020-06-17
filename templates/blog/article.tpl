@@ -1,6 +1,6 @@
-{{ define "article.tpl" }}
+{{ define "blog/article.tpl" }}
     {{ range $i, $v := .articles }}
-        <article class="iarticle" onclick="detailpost('/post/{{ $v.SId }}')">
+        <article class="iarticle" onclick="detailpost('/blog/post/{{ $v.SId }}')">
             <header>
                 <p class="meta">
                     <time class="datetime">{{ $v.CreatedTime }}</time>
@@ -15,10 +15,10 @@
             <footer class="entry-footer">
                 <div class="entry-tags">
                     {{ range $s, $t := $v.Tags }}
-                        <a class="entry-tag" href="/tags/{{ $t }}"><span>#{{ $t }}</span></a>
+                        <a class="entry-tag" href="/blog/tags/{{ $t }}"><span>{{ $t }}</span></a>
                     {{ end }}
                 </div>
-                <a class="read-all" rel="full-article" href="/post/{{ $v.SId }}">
+                <a class="read-all" rel="full-article" href="/blog/post/{{ $v.SId }}">
                     <p class="underline">READ ALL</p>
                 </a>
             </footer>

@@ -1,4 +1,4 @@
-{{ define "nav.tpl" }}
+{{ define "blog/nav.tpl" }}
 {{/*    <progress id="progress" class="waiting">*/}}
 {{/*        <dt></dt>*/}}
 {{/*        <dd></dd>*/}}
@@ -24,9 +24,10 @@
                             </div>
                         </a>
                         <ul id="main-navigation">
-                            <li><a class="nav-item" href="/">博客</a></li>
+                            <li><a class="nav-item" href="/blog/">博客</a></li>
                             <li><a class="nav-item" href="#/about">关于</a></li>
-                            <li><a class="nav-item" href="#/contact">联系</a></li>
+                            <li><a class="nav-item" href="#/about">关于</a></li>
+                            <li><a class="nav-item" href="/tool/">工具</a></li>
                             <li><div class="search-outline">
                                     <div class="input-outline">
                                         <div>
