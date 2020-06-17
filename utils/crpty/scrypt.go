@@ -9,6 +9,7 @@ package scrypt // import "golang.org/x/crypto/scrypt"
 
 import (
 	"crypto/sha256"
+	"encoding/base64"
 	"errors"
 	"github.com/quanee/qlog/utils/pbkdf2"
 	"math/bits"
@@ -211,10 +212,8 @@ func Key(password, salt []byte, N, r, p, keyLen int) ([]byte, error) {
 	return pbkdf2.Key(password, b, 1, keyLen, sha256.New), nil
 }
 
-func Encrypt(password, salt []byte) ([]byte, error) {
-	return Key(password, salt, 1<<15, 8, 1, PW_HASH_BYTES)
-}
+func Encrypt(password, salt []byte) (string, error) {
+	enkey, err := Key(password, salt, 1<<15, 8, 1, 32)
 
-const (
-	PW_HASH_BYTES = 32
-)
+	return base64.StdEncoding.EncodeToString(enkey), err
+}
