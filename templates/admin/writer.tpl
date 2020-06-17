@@ -1,8 +1,8 @@
-{{ define "awriter.tpl" }}
+{{ define "admin/writer.tpl" }}
     <!DOCTYPE html>
     <html lang="en">
     <head>
-        {{ template "aheader.tpl" .}}
+        {{ template "admin/header.tpl" .}}
     </head>
     <body>
     <div class="edit-body">
@@ -26,7 +26,7 @@
         {{ template "footer.tpl" }}
     </div>
     </body>
-    <script src="../static/js/jquery-3.4.1.js"></script>
-    <script type="text/javascript" src="../static/js/aquanee.js"></script>
+    <script src="../../static/blog/js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="../../static/admin/js/aquanee.js"></script>
     </html>
 {{ end }}

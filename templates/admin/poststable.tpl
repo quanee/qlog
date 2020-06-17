@@ -1,4 +1,4 @@
-{{ define "apoststable.tpl" }}
+{{ define "admin/poststable.tpl" }}
     <table class="tabl">
         <thead class="thea">
         <tr class="thead-tr">
