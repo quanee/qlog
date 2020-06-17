@@ -1,7 +1,7 @@
 // gzip
 // enable gzip Compass media source
 
-package middleware
+package blogmw
 
 import (
 	"compress/gzip"

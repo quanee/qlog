@@ -1,4 +1,4 @@
-package middleware
+package blogmw
 
 import (
 	"github.com/quanee/draft"
