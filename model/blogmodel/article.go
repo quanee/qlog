@@ -1,4 +1,4 @@
-package model
+package blogmodel
 
 type Summary struct {
 	SId         string   `json:"id,omitempty"`
@@ -17,4 +17,11 @@ type Content struct {
 type Article struct {
 	Summary
 	Content
+}
+
+type User struct {
+	Id       string `json:"id,omitempty"`
+	UserName string `json:"username,omitempty"`
+	Password string `json:"password,omitempty"`
+	Token    string `json:"token,omitempty"`
 }
