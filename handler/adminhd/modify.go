@@ -1,11 +1,11 @@
-package ahandler
+package adminhd
 
 import (
 	"encoding/json"
 	"github.com/quanee/draft"
 	"github.com/quanee/qlog/database"
-	"github.com/quanee/qlog/logic"
-	"github.com/quanee/qlog/model"
+	"github.com/quanee/qlog/logic/bloglogic"
+	"github.com/quanee/qlog/model/blogmodel"
 	"github.com/quanee/qlog/utils/log"
 	"net/http"
 )
@@ -16,15 +16,15 @@ func Modify(context *draft.Context) {
 	if err != nil {
 		log.Errorf("QueryLimitSummary", err)
 	}
-	article := model.Article{}
+	article := blogmodel.Article{}
 	err = json.Unmarshal(buf[:n], &article)
 	if article.SId == "" {
-		err = logic.Publish(database.DB, &article)
+		err = bloglogic.Publish(database.DB, &article)
 		if err != nil {
 			log.Error("publish article err: ", err)
 		}
 	} else {
-		err = logic.ModifyArticle(database.DB, &article)
+		err = bloglogic.ModifyArticle(database.DB, &article)
 		if err != nil {
 			context.Status(http.StatusExpectationFailed)
 		}

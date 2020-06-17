@@ -1,4 +1,4 @@
-package ahandler
+package adminhd
 
 import (
 	"github.com/quanee/draft"
@@ -7,7 +7,7 @@ import (
 
 func Writer(context *draft.Context) {
 	//err := context.Writer.(http.Pusher)
-	context.HTML(http.StatusOK, "awriter.tpl", draft.H{
+	context.HTML(http.StatusOK, "admin/writer.tpl", draft.H{
 		"title": "写文章",
 	})
 }
