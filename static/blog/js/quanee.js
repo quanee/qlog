@@ -103,7 +103,7 @@ $('#nav-menu').on('click', function () {
 }*/
 
 $('#search-btn').click(function () {
-    fetch("/search/" + $('#search-input').val(), {
+    fetch("/blog/search/" + $('#search-input').val(), {
             method: 'POST',
         }
     ).then(
@@ -112,7 +112,7 @@ $('#search-btn').click(function () {
         }
     ).then(
         (res) => {
-            window.history.pushState("", "", "/search?w=" + $('#search-input').val());
+            window.history.pushState("", "", "/blog/search?w=" + $('#search-input').val());
             $("#content").html(res);
         }
     );
@@ -188,7 +188,7 @@ $('#search-btn').click(function () {
 function getartic(cid, offset) {
     isGet = false;
     $('#loadmore').removeClass('hidden').addClass('show');
-    fetch('/article?' + 'id=' + cid + '&offset=' + offset, {
+    fetch('/blog/article?' + 'id=' + cid + '&offset=' + offset, {
         method: 'GET',
     }).then(
         (res) => {
@@ -222,7 +222,7 @@ $.fn.isOnViewport = function () {
 
 $(window).scroll(function () {
     // console.log(window.location.pathname);
-    if (window.location.pathname.substring(0, 6) === '/post/') {
+    if (window.location.pathname.substring(0, 6) === '/blog/post/') {
         /* 下滑导航转标题 */
         // 初始话可视区域距离页面顶端的距离
         var windowTop = 0;
@@ -242,8 +242,8 @@ $(window).scroll(function () {
             windowTop = scrolls;
         }
     }
-    if ((((window.location.pathname === '/') ||
-        (window.location.pathname === '/index')) &&
+    if ((((window.location.pathname === '/blog/') ||
+        (window.location.pathname === '/blog/index')) &&
         (isGet === true)) && ($('.pagination').isOnViewport())) {
         if (isGet) {
             getartic(curid, offs);
