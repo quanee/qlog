@@ -4,9 +4,11 @@ import (
 	"context"
 	"fmt"
 	"github.com/quanee/draft"
-	"github.com/quanee/qlog/admin/ahandler"
-	"github.com/quanee/qlog/handler"
-	"github.com/quanee/qlog/middleware"
+	"github.com/quanee/qlog/handler/adminhd"
+	"github.com/quanee/qlog/handler/bloghd"
+	"github.com/quanee/qlog/handler/toolhd"
+	"github.com/quanee/qlog/middleware/adminmw"
+	"github.com/quanee/qlog/middleware/blogmw"
 	"html/template"
 	"log"
 	"net/http"
@@ -38,11 +40,7 @@ func main() {
 	//gin.New()
 	r := draft.New()
 	//r.Use(middleware.Pprof())
-	r.Use(middleware.Cookie())
-	r.Use(middleware.Logger())
-	r.Use(middleware.Gzip())
-	r.Use(middleware.Header())
-	r.Use(middleware.Statistic())
+	r.Use(blogmw.Cookie(), blogmw.Logger(), blogmw.Gzip(), blogmw.Header(), blogmw.Statistic())
 	//r.Use(middleware.Cache())
 
 	r.SetFuncMap(template.FuncMap{
@@ -52,28 +50,45 @@ func main() {
 		"formatAsDate": formatAsDate,
 	})*/
 
-	r.LoadHTMLGlob("templates/*")
+	r.LoadHTMLGlob("templates/**/*")
 	r.Static("/static", "./static")
 	//r.Static("/wasm", "./webassembly")
 	//r.StaticFile("/favicon.png", "./static/favicon.png")
+	r.StaticFile("/service-worker.js", "./static/test/js/service-worker.js")
 
-	r.GET("/index", handler.Index)
-	r.GET("/about", handler.About)
-	r.GET("/post/*", handler.Post)
+	blog := r.Group("/blog")
+	blog.GET("/index", bloghd.Index)
+	blog.GET("/about", bloghd.About)
+	blog.GET("/post/*", bloghd.Post)
+	blog.GET("/test/", bloghd.Test)
 	//r.GET("/edit", handler.Edit)
 	//r.GET("/demo", handler.Demo)
-	r.GET("/article", handler.GetArticle)
-	r.GET("/search/*", handler.Search)
-	r.POST("/search/*", handler.Search)
-	r.GET("/", handler.Index)
+	blog.GET("/article", bloghd.GetArticle)
+	blog.GET("/search/*", bloghd.Search)
+	blog.POST("/search/*", bloghd.Search)
+	blog.GET("/", bloghd.Index)
 	//r.GET("/admin/posts", ahandler.Posts)
+	//g := gin.New()
+	//c := gin.Context{}
+	//c.HTML()
+	//g.LoadHTMLGlob()
 
 	admin := r.Group("/admin")
-	admin.Use()
-	admin.GET("/posts", ahandler.Posts)
-	admin.GET("/edit/*", ahandler.Edit)
-	admin.PUT("/put", ahandler.Modify)
-	admin.GET("/writer", ahandler.Writer)
+	admin.Use(adminmw.Auth())
+	admin.GET("/signin/", adminhd.Signin)
+	admin.POST("/signin/", adminhd.Signin)
+	admin.GET("/posts", adminhd.Posts)
+	admin.GET("/edit/*", adminhd.Edit)
+	admin.PUT("/put", adminhd.Modify)
+	admin.GET("/writer", adminhd.Writer)
+
+	tool := r.Group("/tool")
+	tool.GET("/fq", toolhd.Fq)
+	tool.GET("/fq", toolhd.UUID)
+
+	//r.GET("/", testhd.Test)
+	//test := r.Group("/test")
+	//test.GET("/", testhd.Test)
 
 	//err := r.RunTLS(":"+os.Getenv("DRAFT_PORT"), "server.crt", "server.key")
 	err := r.RunTLS(":8080", "server.crt", "server.key")
