@@ -1,15 +1,15 @@
-package logic
+package bloglogic
 
 import (
 	"database/sql"
 	"fmt"
-	"github.com/quanee/qlog/model"
+	"github.com/quanee/qlog/model/blogmodel"
 	"github.com/quanee/qlog/utils/log"
 	"time"
 )
 
 //	SearchArticle: search by words
-func SearchArticle(db *sql.DB, words string) ([]model.Summary, error) {
+func SearchArticle(db *sql.DB, words string) ([]blogmodel.Summary, error) {
 	ql := fmt.Sprintf("SELECT id, title, abstract, created_time FROM summary WHERE id in (SELECT id FROM content WHERE MATCH(substance) AGAINST('%s' IN BOOLEAN MODE));", words)
 	rows, err := db.Query(ql)
 	defer func() {
@@ -20,10 +20,10 @@ func SearchArticle(db *sql.DB, words string) ([]model.Summary, error) {
 	}()
 	if err != nil {
 		log.Error("query all err ", err)
-		return []model.Summary{}, err
+		return []blogmodel.Summary{}, err
 	}
-	var res []model.Summary
-	var summary model.Summary
+	var res []blogmodel.Summary
+	var summary blogmodel.Summary
 	for rows.Next() {
 		err = rows.Scan(&summary.SId, &summary.Title, &summary.Abstract, &summary.CreatedTime)
 		if err != nil {

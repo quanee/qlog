@@ -1,15 +1,15 @@
-package logic
+package bloglogic
 
 import (
 	"database/sql"
 	"fmt"
-	"github.com/quanee/qlog/model"
+	"github.com/quanee/qlog/model/blogmodel"
 	"github.com/quanee/qlog/utils/log"
 	"time"
 )
 
 // publish article
-func Publish(db *sql.DB, article *model.Article) error {
+func Publish(db *sql.DB, article *blogmodel.Article) error {
 	tx, err := db.Begin()
 	if err != nil {
 		log.Error("tx err ", err)
@@ -39,8 +39,8 @@ func Publish(db *sql.DB, article *model.Article) error {
 }
 
 // query all summary
-func QueryAllSummary(db *sql.DB) ([]model.Summary, error) {
-	var res []model.Summary
+func QueryAllSummary(db *sql.DB) ([]blogmodel.Summary, error) {
+	var res []blogmodel.Summary
 	ql := "SELECT id, title, abstract, created_time FROM summary"
 	rows, err := db.Query(ql)
 	defer func() {
@@ -53,7 +53,7 @@ func QueryAllSummary(db *sql.DB) ([]model.Summary, error) {
 		return nil, err
 	}
 
-	var summary model.Summary
+	var summary blogmodel.Summary
 	for rows.Next() {
 		err = rows.Scan(&summary.SId, &summary.Title, &summary.Abstract, &summary.CreatedTime)
 		res = append(res, summary)
@@ -62,8 +62,8 @@ func QueryAllSummary(db *sql.DB) ([]model.Summary, error) {
 }
 
 // query summary by limit and offset
-func QueryLimitSummary(db *sql.DB, id, limit string) ([]model.Summary, error) {
-	var res []model.Summary
+func QueryLimitSummary(db *sql.DB, id, limit string) ([]blogmodel.Summary, error) {
+	var res []blogmodel.Summary
 	//Cache.Query()
 	ql := fmt.Sprintf("SELECT id, title, abstract, created_time FROM summary ORDER BY created_time DESC LIMIT %s OFFSET %s", limit, id)
 	log.Debug(ql)
@@ -79,7 +79,7 @@ func QueryLimitSummary(db *sql.DB, id, limit string) ([]model.Summary, error) {
 		return nil, err
 	}
 
-	var summary model.Summary
+	var summary blogmodel.Summary
 	for rows.Next() {
 		err = rows.Scan(&summary.SId, &summary.Title, &summary.Abstract, &summary.CreatedTime)
 		timeParse, terr := time.Parse("2006-01-02 15:04:05", summary.CreatedTime)
@@ -117,8 +117,8 @@ func QueryLimitSummary(db *sql.DB, id, limit string) ([]model.Summary, error) {
 }
 
 // query article by id
-func QueryOneArticleById(db *sql.DB, id string) model.Article {
-	var article model.Article
+func QueryOneArticleById(db *sql.DB, id string) blogmodel.Article {
+	var article blogmodel.Article
 	ql := fmt.Sprintf("SELECT c.id, c.substance, s.title, s.created_time FROM content AS c, summary AS s WHERE c.id = %s AND c.id = s.id", id)
 	row := db.QueryRow(ql)
 	if err := row.Scan(&article.CId, &article.Substance, &article.Title, &article.CreatedTime); err != nil {
@@ -134,7 +134,7 @@ func QueryOneArticleById(db *sql.DB, id string) model.Article {
 }
 
 // modify article
-func ModifyArticle(db *sql.DB, article *model.Article) error {
+func ModifyArticle(db *sql.DB, article *blogmodel.Article) error {
 	tx, err := db.Begin()
 	if err != nil {
 		log.Error("tx err ", err)
