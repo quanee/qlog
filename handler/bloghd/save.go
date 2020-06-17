@@ -1,11 +1,11 @@
-package handler
+package bloghd
 
 import (
 	"encoding/json"
 	"github.com/quanee/draft"
 	"github.com/quanee/qlog/database"
-	"github.com/quanee/qlog/logic"
-	"github.com/quanee/qlog/model"
+	"github.com/quanee/qlog/logic/bloglogic"
+	"github.com/quanee/qlog/model/blogmodel"
 	"github.com/quanee/qlog/utils/log"
 	"net/http"
 )
@@ -19,19 +19,19 @@ func Save(context *draft.Context) {
 		log.Error("body read err: ", err)
 	}
 	log.Info("read body ", n)
-	article := model.Article{}
+	article := blogmodel.Article{}
 	err = json.Unmarshal(buf[:n], &article)
 	if err != nil {
 		log.Error("json Unmarshal err: ", err)
 	}
 	log.Info("content ", article)
-	err = logic.Publish(database.DB, &article)
+	err = bloglogic.Publish(database.DB, &article)
 	if err != nil {
-		context.HTML(http.StatusOK, "edit.tpl", draft.H{
+		context.HTML(http.StatusOK, "blog/edit.tpl", draft.H{
 			"title": "失败",
 		})
 	}
-	context.HTML(http.StatusOK, "edit.tpl", draft.H{
+	context.HTML(http.StatusOK, "blog/edit.tpl", draft.H{
 		"title": "成功",
 	})
 }

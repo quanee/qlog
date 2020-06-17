@@ -1,9 +1,9 @@
-package handler
+package bloghd
 
 import (
 	"github.com/quanee/draft"
 	"github.com/quanee/qlog/database"
-	"github.com/quanee/qlog/logic"
+	"github.com/quanee/qlog/logic/bloglogic"
 	"github.com/quanee/qlog/utils/http2"
 	"github.com/quanee/qlog/utils/log"
 	"github.com/quanee/qlog/utils/md2html"
@@ -16,8 +16,9 @@ import (
 func Post(context *draft.Context) {
 	http2.Push(context.Writer, "/static/css/quanee.css", "/static/js/quanee.js", "/static/favicon.webp")
 	log.Print(strings.Split(context.Req.RequestURI, "/"))
+	//id := context.Query("id")
 	id := context.QueryParam("param")
-	article := logic.QueryOneArticleById(database.DB, id)
+	article := bloglogic.QueryOneArticleById(database.DB, id)
 
 	substance, err := md2html.MD2HTML(StrToBytes(article.Substance))
 	if err != nil {
@@ -25,7 +26,7 @@ func Post(context *draft.Context) {
 	}
 	article.Substance = substance
 
-	context.HTML(http.StatusOK, "post.tpl", draft.H{
+	context.HTML(http.StatusOK, "blog/post.tpl", draft.H{
 		"article": article,
 		"env":     os.Getenv("ENV"),
 		"title":   article.Title,

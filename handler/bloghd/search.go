@@ -1,9 +1,9 @@
-package handler
+package bloghd
 
 import (
 	"github.com/quanee/draft"
 	"github.com/quanee/qlog/database"
-	"github.com/quanee/qlog/logic"
+	"github.com/quanee/qlog/logic/bloglogic"
 	"github.com/quanee/qlog/utils/log"
 	"net/http"
 	"os"
@@ -11,13 +11,13 @@ import (
 
 func Search(context *draft.Context) {
 	words := context.QueryParam("param")
-	articles, err := logic.SearchArticle(database.DB, words)
+	articles, err := bloglogic.SearchArticle(database.DB, words)
 	if err != nil {
 		log.Errorf("Search error", err)
 	}
 
 	if context.Method == "POST" {
-		context.HTML(http.StatusOK, "article.tpl", draft.H{
+		context.HTML(http.StatusOK, "blog/article.tpl", draft.H{
 			"title":       "搜索",
 			"articles":    articles,
 			"host":        "http://www.quanee.com/",
@@ -26,7 +26,7 @@ func Search(context *draft.Context) {
 			"env":         os.Getenv("ENV"),
 		})
 	} else {
-		context.HTML(http.StatusOK, "search.tpl", draft.H{
+		context.HTML(http.StatusOK, "blog/search.tpl", draft.H{
 			"title":       "搜索",
 			"articles":    articles,
 			"host":        "http://www.quanee.com/",
