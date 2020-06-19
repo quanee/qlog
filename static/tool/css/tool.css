@@ -134,15 +134,19 @@ body {
 
 .card {
     max-width: 200px;
-    height: 150px;
-    border-radius: 5px;
-    background-color: rgba(240, 240, 240, 1);
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.15);
     display: flex;
+    /*display: block;*/
+    border-radius: 12px;
+    height: 147px;
+    width: 287px;
+    transition: box-shadow ease-in-out 300ms;
+    padding: 10px 20px;
+    margin: 20px;
+    border: solid 1px rgba(221, 221, 221, 1);
 }
 
 .card:hover {
-    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 5px 0 rgba(32, 33, 36, 0.58);
 }
 
 .index-body {
