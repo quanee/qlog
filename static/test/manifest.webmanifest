@@ -1,0 +1,14 @@
+{
+	"name": "quanee",
+	"short_name": "quanee",
+	"icons": [{
+		"src": "https://img.quanee.top/favicon.svg",
+		"type": "image/svg+xml",
+		"sizes": "192x192"
+	}],
+	"start_url": "/",
+	"scope": "/",
+	"display": "standalone",
+	"background_color": "#181818",
+	"theme_color": "#181818"
+}

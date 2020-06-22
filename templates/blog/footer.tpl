@@ -1,7 +1,7 @@
-{{ define "blog/footer.tpl" }}
+{{ define "footer.tpl" }}
     <footer class="footer">
-        <p class="foot">Copyright © 2018 Quanee -
+        <div class="foot">Copyright © 2018 Quanee -
             <span class="credit">Powered by <a href="http://w3cschool.org/">Web</a></span>
-        </p>
+        </div>
     </footer>
 {{ end }}

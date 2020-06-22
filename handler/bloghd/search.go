@@ -17,7 +17,7 @@ func Search(context *draft.Context) {
 	}
 
 	if context.Method == "POST" {
-		context.HTML(http.StatusOK, "blog/article.tpl", draft.H{
+		context.HTML(http.StatusOK, "article.tpl", draft.H{
 			"title":       "搜索",
 			"articles":    articles,
 			"host":        "http://www.quanee.com/",
@@ -26,7 +26,7 @@ func Search(context *draft.Context) {
 			"env":         os.Getenv("ENV"),
 		})
 	} else {
-		context.HTML(http.StatusOK, "blog/search.tpl", draft.H{
+		context.HTML(http.StatusOK, "search.tpl", draft.H{
 			"title":       "搜索",
 			"articles":    articles,
 			"host":        "http://www.quanee.com/",

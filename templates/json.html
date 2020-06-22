@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>json</title>
+    <link href="tool.css" rel="stylesheet" type="text/css" media="all"/>
+</head>
+<body>
+<div class="body">
+    <button class="btn" id="format-json">格式化</button>
+    <button class="btn" id="compass-json">压缩</button>
+    <br>
+    <textarea id="input-json" placeholder="输入JSON"></textarea>
+</div>
+</body>
+<script>
+    document.getElementById("format-json").onclick = () => {
+        let msg = document.getElementById("input-json").value.toString();
+        document.getElementById("input-json").value = JSON.stringify(JSON.parse(msg), null, 4);
+    }
+    document.getElementById("compass-json").onclick = () => {
+        let msg = document.getElementById("input-json").value.toString();
+        document.getElementById("input-json").value = JSON.stringify(JSON.parse(msg), null, 0);
+    }
+</script>
+</html>

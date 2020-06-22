@@ -27,11 +27,11 @@ func Save(context *draft.Context) {
 	log.Info("content ", article)
 	err = bloglogic.Publish(database.DB, &article)
 	if err != nil {
-		context.HTML(http.StatusOK, "blog/edit.tpl", draft.H{
+		context.HTML(http.StatusOK, "edit.tpl", draft.H{
 			"title": "失败",
 		})
 	}
-	context.HTML(http.StatusOK, "blog/edit.tpl", draft.H{
+	context.HTML(http.StatusOK, "edit.tpl", draft.H{
 		"title": "成功",
 	})
 }

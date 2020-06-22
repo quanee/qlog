@@ -18,7 +18,7 @@ func Index(context *draft.Context) {
 		log.Errorf("QueryLimitSummary", err)
 	}
 
-	context.HTML(http.StatusOK, "blog/index.tpl", draft.H{
+	context.HTML(http.StatusOK, "index.tpl", draft.H{
 		"title":       "首页",
 		"articles":    articles,
 		"host":        "http://www.quanee.com/",

@@ -1,16 +1,16 @@
-{{ define "blog/post.tpl" }}
+{{ define "post.tpl" }}
     <!DOCTYPE html>
     <html class="js video" lang="en">
     <head>
-        {{ template "blog/header.tpl" .}}
-        <link href="../../static/blog/css/github-markdown.css" media="screen, projection" rel="stylesheet" type="text/css">
+        {{ template "header.tpl" .}}
+        <link href="../../static/blog/css/markdown.css" media="screen, projection" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="../../static/blog/css/prism.css">
     </head>
     <body>
-    {{ template "blog/nav.tpl" . }}
+    {{ template "nav.tpl" . }}
     <div class="body">
         <div id="main">
-            <div id="content">
+            <section id="content">
                 <div class="article">
                     <article>
                         <header>
@@ -27,9 +27,9 @@
                         </footer>
                     </article>
                 </div>
-            </div>
+            </section>
         </div>
-        {{ template "blog/footer.tpl" }}
+        {{ template "footer.tpl" }}
     </div>
     </body>
     <script type="text/javascript" src="/static/blog/js/jquery-3.4.1.js"></script>

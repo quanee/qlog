@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>stamp=date</title>
+    <link href="tool.css" rel="stylesheet" type="text/css" media="all"/>
+</head>
+<body>
+<div class="body">
+    <div>
+        <label class="label" for="timestamp-now">现在</label>
+        <p id="timestamp-now"></p>
+        <button id="stop">■</button>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <label class="label" for="input-timestamp">时间戳: </label><input class="input" type="text" id="input-timestamp">
+        <button class="btn" id="ts2dt">转换>></button>
+        <label class="label" for="output-date">日期时间: </label><input class="input" type="text" id="output-date">
+    </div>
+
+    <div>
+        <label class="label" for="input-date">日期时间: </label><input class="input" type="text" id="input-date">
+        <button class="btn" id="dt2ts">转换>></button>
+        <label class="label" for="output-timestamp">时间戳: </label><input class="input" type="text" id="output-timestamp">
+    </div>
+</div>
+</body>
+<script>
+    document.getElementById("ts2dt").onclick = function () {
+        try {
+            let its = document.getElementById("input-timestamp")
+            let odt = document.getElementById("output-date")
+            if (its.value.length < "3945600".length) {
+                odt.value = "1970-1-1 0:0:0"
+            }
+            let ts = new Date(parseInt(its.value) * 1000)
+            odt.value = ts.getFullYear() + "-" + ts.getMonth() + "-" + ts.getDay() + " " + ts.getHours() + ":" + ts.getMinutes() + ":" + ts.getSeconds()
+        } catch (e) {
+            alert(e)
+        }
+    }
+
+    document.getElementById("dt2ts").onclick = function () {
+        try {
+            let idt = document.getElementById("input-date")
+            let ots = document.getElementById("output-timestamp")
+            ots.value = Math.round((new Date(idt.value)).valueOf() / 1000).toString();
+        } catch (e) {
+            alert(e)
+        }
+    }
+
+    let stop = false;
+    document.getElementById("stop").onclick = function () {
+        stop = !stop;
+        tick();
+    }
+    window.onload = function () {
+        try {
+            tick()
+            let now = new Date()
+            document.getElementById("input-timestamp").value = Math.round((new Date()).valueOf() / 1000).toString();
+            document.getElementById("input-date").value = now.getFullYear() + "-" + now.getMonth() + "-" + now.getDay() + " " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    function tick() {
+        document.getElementById("timestamp-now").innerText = Math.round((new Date()).valueOf() / 1000).toString();
+        if (!stop) {
+            setTimeout("tick()", 1000)
+        }
+    }
+</script>
+</html>

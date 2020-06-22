@@ -1,4 +1,4 @@
-{{ define "blog/nav.tpl" }}
+{{ define "nav.tpl" }}
 {{/*    <progress id="progress" class="waiting">*/}}
 {{/*        <dt></dt>*/}}
 {{/*        <dd></dd>*/}}

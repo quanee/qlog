@@ -1,4 +1,4 @@
-{{ define "blog/header.tpl" }}
+{{ define "header.tpl" }}
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title id="title">{{ .title }}</title>
     <meta name="author" content="Quanee">

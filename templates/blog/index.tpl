@@ -1,17 +1,17 @@
-{{ define "blog/index.tpl" }}
+{{ define "index.tpl" }}
     <!DOCTYPE html>
     <html lang="en">
     <head>
-        {{ template "blog/header.tpl" . }}
+        {{ template "header.tpl" . }}
     </head>
     <body>
-    {{ template "blog/nav.tpl" . }}
+    {{ template "nav.tpl" . }}
     <div class="body" id="body">
         <div id="main">
-            <div id="content">
-                <div class="blog-index" id="index-article">
-                    {{ template "blog/article.tpl" . }}
-                </div>
+            <section id="content">
+                <article class="blog-index" id="index-article">
+                    {{ template "article.tpl" . }}
+                </article>
                 <div class="pagination">
                     <div id="loadmore">
                         <div class="google-loader">
@@ -23,16 +23,16 @@
                     </div>
 
                 </div>
-            </div>
+            </section>
         </div>
     </div>
-    {{ template "blog/footer.tpl" }}
+    {{ template "footer.tpl" }}
     </body>
     {{ if eq .env "release" }}
-    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script async src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     {{ else }}
-    <script type="text/javascript" src="/static/blog/js/jquery-3.4.1.js"></script>
+    <script async type="text/javascript" src="/static/blog/js/jquery-3.4.1.js"></script>
     {{ end }}
-    <script type="text/javascript" src="/static/blog/js/quanee.js"></script>
+    <script async type="text/javascript" src="/static/blog/js/quanee.js"></script>
     </html>
 {{ end }}

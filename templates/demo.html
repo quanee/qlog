@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+    <style>
+        .box11 {
+            width: 200px; /* Set the Width of box          */
+            height: 50px; /* Set the Height of box         */
+            background: #424242; /* Dark Grey Background color    */
+            transition: all 0.25s ease; /* Transition settings           */
+            display: flex; /* Use Flexbox on P              */
+            align-items: center; /* Center P                      */
+            justify-content: center; /* Center P                      */
+            margin: 10px;
+        }
+
+        .fade:hover {
+            opacity: 0.5;
+        }
+
+        .color:hover {
+            background: #FF5722;
+        }
+
+        @keyframes wiggle {
+            20% {
+                transform: translateX(4px);
+            }
+            40% {
+                transform: translateX(-4px);
+            }
+            60% {
+                transform: translateX(2px);
+            }
+            80% {
+                transform: translateX(-1px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .wiggle:hover {
+            animation: wiggle 1s ease;
+            animation-iteration-count: 1;
+        }
+    </style>
+    <style>
+        #effect-music {
+            position: relative;
+            margin: auto;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        #effect-music > .image {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            width: 200px;
+            height: 200px;
+            background: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575820971101&di=935fabf797c3b30f45f7ed90666f9399&imgtype=0&src=http%3A%2F%2Fimglf1.ph.126.net%2FJceVstVIHMeAlbMvdbYwlA%3D%3D%2F2456713596830921578.jpg);
+            background-size: cover;
+            background-position: center center;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            animation: rotate 10s linear 0s infinite;
+            -webkit-animation: rotate 10s linear 0s infinite;
+        }
+
+        #effect-music > .wave {
+            position: absolute;
+            opacity: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            width: 204px;
+            height: 204px;
+            border-radius: 50%;
+            border: 2px solid #eee;
+            animation: wave 4s linear 0s infinite;
+            -webkit-animation: wave 4s linear 0s infinite;
+        }
+
+        #effect-music > .wave::after {
+            content: "";
+            position: absolute;
+            top: -4px;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            overflow: hidden;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+            background-color: #ccc;
+        }
+
+        #effect-music > .wave:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        #effect-music > .wave:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        #effect-music > .wave:nth-child(4) {
+            animation-delay: 3s;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes wave {
+            from {
+                opacity: 1;
+                transform: rotate(0deg) scale(1);
+                -webkit-transform: rotate(0deg) scale(1);
+                -moz-transform: rotate(0deg) scale(1);
+                -ms-transform: rotate(0deg) scale(1);
+                -o-transform: rotate(0deg) scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: rotate(-300deg) scale(2.2);
+                -webkit-transform: rotate(-300deg) scale(2.2);
+                -moz-transform: rotate(-300deg) scale(2.2);
+                -ms-transform: rotate(-300deg) scale(2.2);
+                -o-transform: rotate(-300deg) scale(2.2);
+            }
+        }
+    </style>
+    <style>
+        :root {
+            --height: 100px;
+            --width: 200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            font-family: sans-serif;
+        }
+
+        .wrapper {
+            width: calc(4 * var(--width));
+            height: calc(4 * var(--height));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button {
+            position: relative;
+            width: calc(0.8 * var(--width));
+            height: calc(0.7 * var(--height));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            overflow: hidden;
+            margin: 0 0.8rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), 0 3px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0, 0.22, 0.3, 1);
+        }
+
+        .button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .button span {
+            color: #fff;
+            font-size: 1rem;
+            z-index: 10;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .button._1 {
+            background: #2980b9;
+        }
+
+        .button._2 {
+            background: #8e44ad;
+        }
+
+        .button._3 {
+            background: #16a085;
+        }
+
+        .button._4 {
+            background: #e74c3c;
+        }
+
+        .button .back {
+            position: absolute;
+            width: 0;
+            height: 0;
+            filter: url(#filter);
+            border-radius: 50%;
+            z-index: 5;
+            transition: all 2.5s cubic-bezier(0.1, 0.22, 0.3, 1);
+        }
+
+        .button._1 .back {
+            left: -50%;
+            top: -50%;
+            background: #27ae60;
+        }
+
+        .button._2 .back {
+            right: -50%;
+            top: -50%;
+            background: #c0392b;
+        }
+
+        .button._3 .back {
+            left: -50%;
+            bottom: -50%;
+            background: #34495e;
+        }
+
+        .button._4 .back {
+            right: -50%;
+            bottom: -50%;
+            background: #2980b9;
+        }
+
+        .button:hover .back {
+            width: calc(2 * var(--width));
+            height: calc(2 * var(--height));
+        }
+
+        @media only screen and (max-width: 750px) {
+            .wrapper {
+                flex-direction: column;
+            }
+
+            .button {
+                margin: 0.8rem 0;
+            }
+        }
+    </style>
+    <style>
+        .a {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #363;
+            transition: .2s;
+            display: block;
+        }
+
+        .a:before, .a:after {
+            content: "";
+            position: absolute;
+            width: 12px;
+            height: 0;
+            top: 24px;
+            border-style: solid;
+            border-width: 0 0 54px 0;
+        }
+
+        .a:before {
+            left: 27px;
+            border-color: #fff rgba(255, 255, 255, 0) #fff rgba(255, 255, 255, 0);
+            transition: .2s;
+        }
+
+        .a:after {
+            left: 54px;
+            border-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) #fff #fff;
+            transition: .2s;
+        }
+
+        .a:hover:before {
+            top: 26px;
+            left: 45px;
+            width: 0;
+            transform: scale(2, 1.17) rotate(90deg);
+            border-width: 0 0 24px 24px;
+        }
+
+        .a:hover:after {
+            top: 53px;
+            left: 45px;
+            width: 0;
+            transform: scale(2, 1.17) rotate(90deg);
+            border-width: 0 24px 24px 0;
+        }
+
+        .a:hover {
+            background: #095;
+            transition: .4s;
+        }
+
+        /*.a:active:before {
+            border-width: 0 0 24px 0;
+            width: 22px;
+            top: 26px;
+            left: 38px;
+            transition: .4s;
+        }
+
+        .a:active:after {
+            border-width: 0 0 24px 0;
+            width: 22px;
+            top: 50px;
+            left: 38px;
+            transition: .4s;
+        }
+
+        .a:active {
+            transform: rotate(180deg);
+            background: #0a9;
+        }*/
+
+        .b {
+            position: absolute;
+            top: 50px;
+            left: 160px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #09c;
+            transition: .2s;
+        }
+
+        .b i {
+            position: absolute;
+            display: block;
+            width: 3.5rem;
+            height: .625rem;
+            background: #fff;
+            left: 1.39rem;
+            border-radius: 2px;
+            transition: .2s;
+        }
+
+        .b1 {
+            top: 24px;
+        }
+
+        .b2 {
+            top: 44px;
+        }
+
+        .b3 {
+            top: 64px;
+        }
+
+        .b:hover .b1 {
+            left: 15px;
+            width: 70px;
+            transform: translateY(20px) rotate(45deg);
+        }
+
+        .b:hover .b3 {
+            left: 15px;
+            width: 70px;
+            transform: translateY(-20px) rotate(-45deg);
+        }
+
+        .b:hover .b2 {
+            left: 50px;
+            width: 0;
+        }
+
+        .b:hover {
+            background: #c00;
+        }
+
+        .b:active .b1 {
+            width: 40px;
+            transform: translateY(11px) rotate(-45deg);
+            transition: .3s;
+        }
+
+        .b:active .b3 {
+            width: 40px;
+            transform: translateY(-7px) rotate(45deg);
+            transition: .3s;
+        }
+
+        .b:active .b2 {
+            top: 46px;
+            left: 22px;
+            width: 60px;
+            transition: .3s;
+        }
+
+        .b:active {
+            transform: rotate(45deg);
+            background: #f70;
+        }
+    </style>
+    <style>
+        .btn {
+            position: relative;
+            width: 200px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 3px;
+            background: #5ad;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .btn::before {
+            content: "loading";
+            position: absolute;
+            width: 200px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 3px;
+            z-index: 2;
+            top: 0;
+            left: 0;
+            color: #fff;
+            text-shadow: rgba(100, 0, 0, 1) 0 0 3px;
+            background: #c00;
+        }
+
+        .btn, .btn::before {
+            width: 200px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 3px;
+        }
+
+        .btn {
+            position: relative;
+            background: #5ad;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .btn::before {
+            content: "loading";
+            position: absolute;
+            display: none;
+            z-index: 2;
+            top: 0;
+            left: 0;
+            color: #fff;
+            text-shadow: rgba(100, 0, 0, 1) 0 0 3px;
+            background: linear-gradient(45deg, #fc0 0%, #fc0 20%, #fa0 20%, #fa0 45%, #fc0 45%, #fc0 70%, #fa0 70%, #fa0 95%, #fc0 95%, #fc0 100%);
+            background-size: 30px 30px;
+            background-position: 0 0;
+            animation: click 1s infinite linear;
+        }
+
+        .btn.click::before {
+            display: block;
+        }
+
+        @keyframes click {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 30px 0;
+            }
+        }
+    </style>
+    <style>
+        .wutai {
+            width: 100%;
+            height: 100%;
+            border: 0; /* background: black; */
+            margin: 0 auto;
+        }
+
+        .mofang {
+            width: 100px;
+            height: 100px; /* perspective: 2500px;                perspective-origin:-500% -550%; */
+            transform-style: preserve-3d;
+            animation: texiao 10s linear infinite alternate;
+        }
+
+        .box {
+            width: 90px;
+            height: 90px;
+            margin: 100px;
+            text-align: center;
+            line-height: 30px;
+            display: grid;
+            grid-template-columns: 30px 30px 30px;
+            grid-template-rows: 30px 30px 30px;
+            position: absolute;
+        }
+
+        .box .box1 {
+            border: 1px solid white;
+            background: #AACCEE;
+        }
+
+        .box .box2 {
+            border: 1px solid white;
+            background: #FF9966;
+        }
+
+        .box .box3 {
+            border: 1px solid white;
+            background: #00FFFF;
+        }
+
+        .box .box4 {
+            border: 1px solid white;
+            background: #FF0000;
+        }
+
+        .box .box5 {
+            border: 1px solid white;
+            background: #FFFF00;
+        }
+
+        .box .box6 {
+            border: 1px solid white;
+            background: blueviolet;
+        }
+
+        /* 后*/
+        .mian1 {
+            transform: translateZ(-45px);
+        }
+
+        /* 左*/
+        .mian2 {
+            transform: translateX(-45px) rotateY(90deg);
+        }
+
+        /* 上*/
+        .mian3 {
+            transform: translateY(-45px) rotateX(90deg);
+        }
+
+        /* 右*/
+        .mian4 {
+            transform: translateX(45px) rotateY(90deg);
+        }
+
+        /* 下*/
+        .mian5 {
+            transform: translateY(45px) rotateX(90deg);
+        }
+
+        /* 前*/
+        .mian6 {
+            transform: translateZ(45px);
+        }
+
+        @keyframes texiao {
+            0% {
+                transform: translate(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+            }
+            50% {
+                transform: translate(365px) rotateX(0deg) rotateY(365deg) rotateZ(128deg);
+            }
+            100% {
+                transform: translate(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<div style="display: block; position: relative;">
+    <div class="box11"><p>TEXT</p></div>
+    <div class="box11 fade"><p>FADE</p></div>
+    <div class="box11 color"><p>COLOR</p></div>
+    <div class="box11 wiggle"><p>WIGGLE</p></div>
+</div>
+<br>
+<div style="display: block; position: relative;">
+    <div id="effect-music">
+        <div class="image"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+</div>
+<br>
+<div style="display: block; position: relative;">
+    <svg width="0" height="0">
+        <filter id="filter">
+            <feTurbulence type="fractalNoise" baseFrequency=".01" numOctaves="6"/>
+            <feDisplacementMap in="SourceGraphic" scale="100"/>
+        </filter>
+    </svg>
+    <div class="wrapper">
+        <div class="button _1"><span>hover</span>
+            <div class="back"></div>
+        </div>
+        <div class="button _2"><span>hover</span>
+            <div class="back"></div>
+        </div>
+        <div class="button _3"><span>hover</span>
+            <div class="back"></div>
+        </div>
+        <div class="button _4"><span>hover</span>
+            <div class="back"></div>
+        </div>
+    </div>
+</div>
+<br>
+<div style="display: block; position: relative; height: 200px;">
+    <div class="a"></div>
+    <div class="b">
+        <i class="b1"></i>
+        <i class="b2"></i>
+        <i class="b3"></i>
+    </div>
+</div>
+
+
+<br>
+<div style="display: block; position: relative;">
+    <div class="btn">click me</div>
+</div>
+<br>
+<div style="display: block; position: relative; height: 400px">
+    <div class="wutai">
+        <div class="mofang">
+            <div class="box mian1">
+                <div class="box1">1</div>
+                <div class="box1">2</div>
+                <div class="box1">3</div>
+                <div class="box1">4</div>
+                <div class="box1">5</div>
+                <div class="box1">6</div>
+                <div class="box1">7</div>
+                <div class="box1">8</div>
+                <div class="box1">9</div>
+            </div>
+            <div class="box mian2">
+                <div class="box2">1</div>
+                <div class="box2">2</div>
+                <div class="box2">3</div>
+                <div class="box2">4</div>
+                <div class="box2">5</div>
+                <div class="box2">6</div>
+                <div class="box2">7</div>
+                <div class="box2">8</div>
+                <div class="box2">9</div>
+            </div>
+            <div class="box mian3">
+                <div class="box3">1</div>
+                <div class="box3">2</div>
+                <div class="box3">3</div>
+                <div class="box3">4</div>
+                <div class="box3">5</div>
+                <div class="box3">6</div>
+                <div class="box3">7</div>
+                <div class="box3">8</div>
+                <div class="box3">9</div>
+            </div>
+            <div class="box mian4">
+                <div class="box4">1</div>
+                <div class="box4">2</div>
+                <div class="box4">3</div>
+                <div class="box4">4</div>
+                <div class="box4">5</div>
+                <div class="box4">6</div>
+                <div class="box4">7</div>
+                <div class="box4">8</div>
+                <div class="box4">9</div>
+            </div>
+            <div class="box mian5">
+                <div class="box5">1</div>
+                <div class="box5">2</div>
+                <div class="box5">3</div>
+                <div class="box5">4</div>
+                <div class="box5">5</div>
+                <div class="box5">6</div>
+                <div class="box5">7</div>
+                <div class="box5">8</div>
+                <div class="box5">9</div>
+            </div>
+            <div class="box mian6">
+                <div class="box6">1</div>
+                <div class="box6">2</div>
+                <div class="box6">3</div>
+                <div class="box6">4</div>
+                <div class="box6">5</div>
+                <div class="box6">6</div>
+                <div class="box6">7</div>
+                <div class="box6">8</div>
+                <div class="box6">9</div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../static/blog/js/jquery-3.4.1.js"></script>
+<script>
+    $(function () {
+        var timer;
+        $('.btn').on('click', function () {
+            $('.btn').addClass('click');
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+                $('.btn').removeClass('click');
+            }, 2000);
+        });
+    });
+</script>
+</html>

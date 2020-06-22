@@ -51,10 +51,16 @@ func main() {
 	r.GET("/blog/", bloghd.Index)
 	r.GET("/about", bloghd.About)
 	r.GET("/post/*", bloghd.Post)
-	//r.GET("/test/", bloghd.Test)
 	r.GET("/article", bloghd.GetArticle)
 	r.GET("/search/*", bloghd.Search)
 	r.POST("/search/*", bloghd.Search)
+	r.GET("/tool/", toolhd.Tool)
+	r.GET("/fq/", toolhd.Fq)
+	r.GET("/uuid/", toolhd.UUID)
+	r.GET("/json/", toolhd.Json)
+	r.GET("/color/", toolhd.Color)
+	r.GET("/timestamp/", toolhd.Timestamp)
+	r.GET("/encdec/", toolhd.Encdec)
 
 	admin := r.Group("/admin")
 	admin.Use(adminmw.Auth())
@@ -65,9 +71,7 @@ func main() {
 	admin.PUT("/put", adminhd.Modify)
 	admin.GET("/writer", adminhd.Writer)
 
-	tool := r.Group("/tool")
-	tool.GET("/fq", toolhd.Fq)
-	tool.GET("/fq", toolhd.UUID)
+	r.GET("/*", bloghd.NotFound)
 
 	err := r.RunTLS(":8080", "server.crt", "server.key")
 	if err != nil {

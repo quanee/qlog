@@ -1,16 +1,13 @@
 package toolhd
 
 import (
-	"crypto/rand"
 	"encoding/hex"
 	"github.com/quanee/draft"
-	"io"
-	"log"
 	"net/http"
 )
 
 func UUID(context *draft.Context) {
-	uuid := [16]byte{}
+	/*uuid := [16]byte{}
 	_, err := io.ReadFull(rand.Reader, uuid[:])
 	if err != nil {
 		log.Print(err)
@@ -18,10 +15,10 @@ func UUID(context *draft.Context) {
 	uuid[6] &= 0x0f
 	uuid[6] |= 0x40
 	uuid[8] &= 0x3f
-	uuid[8] |= 0x80
-	context.HTML(http.StatusOK, "tool/uuid.tpl", draft.H{
+	uuid[8] |= 0x80*/
+	context.HTML(http.StatusOK, "uuid.tpl", draft.H{
 		"title": "UUID",
-		"uuid":  toUUID(uuid),
+		//"uuid":  toUUID(uuid),
 	})
 }
 

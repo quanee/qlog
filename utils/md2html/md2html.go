@@ -1,6 +1,6 @@
 package md2html
 
-import "gitlab.com/golang-commonmark/markdown"
+import "github.com/quanee/markdown"
 
 //func MD2HTML(markdown []byte) (string, error) {
 //	luteEngine := lute.New() // 默认已经启用 GFM 支持以及中文语境优化

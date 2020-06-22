@@ -1,17 +1,17 @@
-{{ define "blog/search.tpl" }}
+{{ define "search.tpl" }}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {{ template "blog/header.tpl" . }}
+    {{ template "header.tpl" . }}
 </head>
 <body>
 
-{{ template "blog/nav.tpl" . }}
+{{ template "nav.tpl" . }}
 <div class="body" id="body">
     <div id="main">
         <div id="content">
             <div class="blog-index" id="index-article">
-                {{ template "blog/article.tpl" . }}
+                {{ template "article.tpl" . }}
             </div>
             <div class="pagination">
                 <div class="loadmore" id="loadmore">
@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    {{ template "blog/footer.tpl" }}
+    {{ template "footer.tpl" }}
 </div>
 </body>
 {{ if eq .env "release" }}

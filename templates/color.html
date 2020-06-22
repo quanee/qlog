@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="../static/tool/css/tool.css"/>
+    <meta charset="UTF-8">
+    <title>color</title>
+    <link href="tool.css" rel="stylesheet" type="text/css" media="all"/>
+</head>
+<body>
+<div class="body">
+    <div>
+        <div>
+            <label class="label" for="input-rgb">RGB: </label><input class="input" type="text" id="input-rgb">
+            <button class="btn" id="rgb">转换</button>
+            <label class="label" for="input-hex">HEX: </label><input class="input" type="text" id="input-hex">
+            <button class="btn" id="hex">转换</button>
+        </div>
+
+        <div>
+            <ul id="conv-ret">
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="dialog-bg">
+    <dialog id="dialog" open></dialog>
+</div>
+</body>
+<script>
+    window.onload = () => {
+        document.getElementById("input-rgb").value = "rgb(128, 128, 128)"
+        document.getElementById("input-hex").value = "#808080"
+    }
+    document.getElementById("rgb").onclick = () => {
+        let colorArr = document.getElementById("input-rgb").value.replace(/(?:\(|\)|rgba|RGBA|rgb|RGB)*/g, "").split(",");
+        let ret = "#";
+        for (let i = 0, j = colorArr.length; i < j; i++) {
+            let hex = Number(colorArr[i]).toString(16);
+            if (colorArr[i] < 0) {
+                hex = "0";
+            }
+            if (colorArr[i] > 255) {
+                hex = "FF";
+            }
+            if (colorArr[i] < 15 || hex.length < 2) {
+                hex = "0" + hex;
+            }
+            if (hex === "0") {
+                hex += hex;
+            }
+            ret += hex
+        }
+        document.getElementById("conv-ret").innerHTML = "<li>" + ret.toUpperCase() + "</li>";
+    }
+    document.getElementById("hex").onclick = () => {
+        let ret = "#";
+        let color = document.getElementById("input-hex").value;
+        let reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+        if (reg.test(color.toLowerCase())) {
+            if (color.length === 4) {
+                for (let i = 1; i < 4; i += 1) {
+                    ret += color.slice(i, i + 1).concat(color.slice(i, i + 1));
+                }
+            } else {
+                ret = color;
+            }
+
+            let colorChange = [];
+            for (let i = 1; i < 7; i += 2) {
+                let tmp = parseInt("0x" + ret.slice(i, i + 2));
+                if (tmp > 0xff) {
+                    tmp = 0xff;
+                } else if (tmp < 0 || isNaN(tmp)) {
+                    tmp = 0;
+                }
+                colorChange.push(tmp);
+            }
+
+            document.getElementById("conv-ret").innerHTML = "<li>" + "RGB(" + colorChange.join(",") + ")" + "</li>";
+        } else {
+            document.getElementById("dialog-bg").style.display = "flex";
+        }
+    }
+
+    document.getElementById("dialog-bg").onclick = () => {
+        document.getElementById("dialog-bg").style.display = "none";
+    }
+
+</script>
+</html>

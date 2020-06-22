@@ -14,7 +14,7 @@ import (
 )
 
 func Post(context *draft.Context) {
-	http2.Push(context.Writer, "/static/css/quanee.css", "/static/js/quanee.js", "/static/favicon.webp")
+	http2.Push(context.Writer, "/static/blog/css/quanee.css", "/static/blog/js/quanee.js", "/static/favicon.webp")
 	log.Print(strings.Split(context.Req.RequestURI, "/"))
 	//id := context.Query("id")
 	id := context.QueryParam("param")
@@ -26,7 +26,7 @@ func Post(context *draft.Context) {
 	}
 	article.Substance = substance
 
-	context.HTML(http.StatusOK, "blog/post.tpl", draft.H{
+	context.HTML(http.StatusOK, "post.tpl", draft.H{
 		"article": article,
 		"env":     os.Getenv("ENV"),
 		"title":   article.Title,

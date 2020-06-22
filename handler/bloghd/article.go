@@ -20,7 +20,7 @@ func GetArticle(context *draft.Context) {
 	if len(articles) == 0 {
 		context.String(http.StatusOK, "done")
 	} else {
-		context.HTML(http.StatusOK, "blog/article.tpl", draft.H{
+		context.HTML(http.StatusOK, "article.tpl", draft.H{
 			"title":       "首页",
 			"articles":    articles,
 			"host":        "http://www.quanee.com/",

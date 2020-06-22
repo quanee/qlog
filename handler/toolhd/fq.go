@@ -6,7 +6,7 @@ import (
 )
 
 func Fq(context *draft.Context) {
-	context.HTML(http.StatusOK, "tool/fq.tpl", draft.H{
+	context.HTML(http.StatusOK, "fq.tpl", draft.H{
 		"title": "番茄钟",
 	})
 }
