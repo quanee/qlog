@@ -2,8 +2,10 @@ package config
 
 import (
 	"context"
+	"fmt"
 	"github.com/quanee/qlog/utils/log"
 	"go.etcd.io/etcd/clientv3"
+	"os"
 	"strconv"
 	"time"
 )
@@ -16,7 +18,7 @@ var (
 func init() {
 	var err error
 	config, err = clientv3.New(clientv3.Config{
-		Endpoints:   []string{"106.13.230.225:3533"},
+		Endpoints:   []string{fmt.Sprintf("%s:%s", os.Getenv("ETCD_HOST"), os.Getenv("ETCD_PORT"))},
 		DialTimeout: 10 * time.Second,
 	})
 	ctx = context.Background()
