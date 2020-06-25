@@ -10,8 +10,8 @@ import (
 )
 
 func GetArticle(context *draft.Context) {
-	id := context.Req.URL.Query().Get("id")
-	offset := context.Req.URL.Query().Get("offset")
+	id := context.Req.URL.Query().Get("offset")
+	offset := context.Req.URL.Query().Get("limit")
 	articles, err := bloglogic.QueryLimitSummary(database.DB, id, offset)
 	if err != nil {
 		log.Errorf("QueryLimitSummary", err)

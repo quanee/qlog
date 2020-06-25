@@ -29,6 +29,7 @@ func Post(context *draft.Context) {
 	context.HTML(http.StatusOK, "post.tpl", draft.H{
 		"article": article,
 		"env":     os.Getenv("ENV"),
+		"tex": "tex",
 		"title":   article.Title,
 	})
 }
