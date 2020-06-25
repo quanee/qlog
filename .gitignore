@@ -1,0 +1,13 @@
+.idea/
+/dist/*
+/go.mod
+/go.sum
+/gulpfile.js
+/handler/testhd/*
+/index.js
+/node_modules/*
+/package-lock.json
+/package.json
+/server.crt
+/server.key
+/zap.logger
