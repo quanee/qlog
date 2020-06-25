@@ -49,6 +49,7 @@ func main() {
 	r.StaticFile("/service-worker.js", "./static/test/js/service-worker.js")
 
 	r.GET("/blog/", bloghd.Index)
+	r.GET("/", bloghd.AllIndex)
 	r.GET("/about", bloghd.About)
 	r.GET("/post/*", bloghd.Post)
 	r.GET("/article", bloghd.GetArticle)
