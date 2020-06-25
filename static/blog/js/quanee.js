@@ -1,126 +1,165 @@
-var curid = 10;
-var offs = 5;
-var codemirror;
-var md;
-var isGet = true;
-var toggleNavMenu = true;
-
 function backTop() {
     let scrolltop = [];
     let i = 0;
     scrolltop[0] = 0;
-    console.log("out")
-    $(document).scroll(function () {
+    document.onscroll = () => {
         i++;
-        console.log("hello")
-        scrolltop[i] = $(document).scrollTop();
-        if ($(window).width() > 1111) {
-            if (scrolltop[i] > scrolltop[i - 1]) {
-                $('#backtop').fadeOut(200)
+        scrolltop[i] = window.pageYOffset;
+        if (scrolltop[i] > scrolltop[i - 1]) {
+            document.getElementById('backtop').classList.remove('fadein')
+            // document.getElementById("backtop").
+        } else {
+            document.getElementById('backtop').classList.add('fadein')
+        }
+    };
+
+    document.getElementById("backtop").onclick = () => {
+        let callback = (x) => {
+            window.scrollTo(0, x);
+        }
+        let change = document.documentElement.scrollTop || document.body.scrollTop;
+        RAF(callback, change, 1000)
+    }
+
+    function easeInOutCubic(k) {
+        return (k *= 2) < 1 ? 0.5 * k * k * k : 0.5 * ((k -= 2) * k * k + 2);
+    }
+
+    function RAF(callback, change, duration) {
+        let handle;
+        // 返回动画函数
+        // 开始时间
+        let startTime = performance.now();
+        // 防止启动多个定时器
+        cancelAnimationFrame(handle);
+
+        // 回调函数
+        function _animation() {
+            // 这一帧开始的时间
+            let current = performance.now();
+            // let eleTop = ele.offsetLeft;
+            // 这一帧内元素移动的距离
+            let left = Math.round(change * easeInOutCubic((current - startTime) / duration));
+            callback(change - left)
+            // 判断动画是否执行完
+            if ((current - startTime) / duration < 1) {
+                handle = requestAnimationFrame(_animation);
             } else {
-                $('#backtop').fadeIn(200)
+                cancelAnimationFrame(handle);
             }
         }
-    });
 
-    $('#backtop').on('click', function () {
-        $('html, body').animate({
-            scrollTop: 0
-        }, 500, easeInOutQuint());
-    });
-
-    function easeInOutQuint(x, t, b, c, d) {
-        if ((t /= d / 2) < 1) return c / 2 * t * t * t * t * t + b;
-        return c / 2 * ((t -= 2) * t * t * t * t + 2) + b;
+        // 第一帧开始
+        handle = requestAnimationFrame(_animation);
     }
 }
 
-$('#nav-menu').on('click', function () {
-    $('body.nav')
-});
+try {
+    document.getElementById('nav-menu').onclick = () => {
+        document.getElementsByName('body')
+    }
+} catch (e) {
+    console.log(e)
+}
 
-$('#search-btn').click(function () {
-    fetch("/search/" + $('#search-input').val(), {
+try {
+    document.getElementById('search-btn').onclick = () => {
+        fetch("/search/" + document.getElementById('search-input').value, {
             method: 'POST',
-        }
-    ).then(
-        (res) => {
-            return res.text()
-        }
-    ).then(
-        (res) => {
-            window.history.pushState("", "", "/search?w=" + $('#search-input').val());
-            $("#content").html(res);
-        }
-    );
-});
+        }).then(
+            (res) => {
+                return res.text()
+            }
+        ).then(
+            (res) => {
+                window.history.pushState("", "", "/search?w=" + document.getElementById('search-input').value);
+                document.getElementById('content').innerHTML = res;
+            }
+        );
+    };
+} catch (e) {
+    console.log(e)
+}
 
 
-function getartic(cid, offset) {
-    isGet = false;
-    $('#loadmore').removeClass('hidden').addClass('show');
-    fetch('/article?' + 'id=' + cid + '&offset=' + offset, {
+let isloading = false;
+
+function loadmore(offset, limit) {
+    if (isloading) {
+        return
+    }
+    let over = false;
+    if (over) {
+        return
+    }
+    isloading = true;
+    loadingimg()
+
+    fetch('/article?' + 'offset=' + offset + '&limit=' + limit, {
         method: 'GET',
     }).then(
         (res) => {
-            return res.text()
+            return res.text();
         }
-    ).then(
-        (res) => {
-            if (res === "done") {
-                isGet = false;
-            } else {
-                $(document).ready(function () {
-                    $('#index-article').html($('#index-article').html() + res);
-                });
-                isGet = true;
-            }
-
-            $('#loadmore').removeClass('show').addClass('hidden');
+    ).then((res) => {
+        if (res === "done") {
+            over = true;
+            loadingimg();
+        } else {
+            setTimeout(() => {
+                document.getElementById("index-article").innerHTML += res;
+                isloading = false;
+                loadingimg();
+            }, 3000);
         }
-    );
+        console.log(isloading)
+    });
 }
 
+function loadingimg() {
+    let loading = document.getElementById('loadmore');
+    if (loading.style.display === 'block') {
+        loading.style.display = 'none';
+    } else {
+        loading.style.display = 'block';
 
-$.fn.isOnViewport = function () {
-    let elementTop = $(this).offset().top;
-    let elementBottom = elementTop + $(this).outerHeight();
-    let viewportTop = $(window).scrollTop();
-    let viewportBottom = viewportTop + $(window).height();
-
-    return elementBottom > viewportTop && elementTop < viewportBottom;
-};
-
-$(window).scroll(function () {
-    if (window.location.pathname.substring(0, 6) === '/post/') {
-        /* 下滑导航转标题 */
-        // 初始话可视区域距离页面顶端的距离
-        let windowTop = 0;
-        // 获取当前可视区域距离页面顶端的距离
-        let scrolls = $(this).scrollTop();
-        // console.log(scrolls);
-        // 当scrolls>windowTop时，表示页面在向下滑动
-        if ((scrolls >= windowTop) && (scrolls > 110)) {
-            //需要执行隐藏导航的操作
-            $('#post-nav-title').addClass('nav-title-tran');
-            $('#ln-menu-tray').addClass('nav-menu-tran');
-            windowTop = scrolls;
-        } else {
-            // 上滑
-            $('#post-nav-title').removeClass('nav-title-tran');
-            $('#ln-menu-tray').removeClass('nav-menu-tran');
-            windowTop = scrolls;
-        }
     }
-    if ((((window.location.pathname === '/blog/') ||
-        (window.location.pathname === '/blog/')) &&
-        (isGet === true)) && ($('.pagination').isOnViewport())) {
-        if (isGet) {
-            getartic(curid, offs);
-            curid += offs;
+}
+
+let offset = 10;
+
+try {
+    window.onscroll = () => {
+        const limit = 5;
+        if (window.location.pathname.substring(0, 6) === '/post/') {
+            /* 下滑导航转标题 */
+            // 初始话可视区域距离页面顶端的距离
+            let windowTop = 0;
+            // 获取当前可视区域距离页面顶端的距离
+            let scrolls = window.pageYOffset;
+            console.log(scrolls, );
+            // 当scrolls>windowTop时，表示页面在向下滑动
+            if ((scrolls >= windowTop) && (scrolls > 110)) {
+                //需要执行隐藏导航的操作
+                document.getElementById("post-nav-title").classList.add("nav-title-tran")
+                document.getElementById("ln-menu-tray").classList.add("nav-menu-tran")
+                windowTop = scrolls;
+            } else {
+                // 上滑
+                document.getElementById("post-nav-title").classList.remove("nav-title-tran")
+                document.getElementById("ln-menu-tray").classList.remove("nav-menu-tran")
+                windowTop = scrolls;
+            }
         }
-    }
-});
+
+        if (window.location.pathname === '/blog/' && isOnViewport(document.getElementById("pagination")) && !isloading) {
+            loadmore(offset, limit);
+            offset += limit;
+        }
+    };
+} catch (e) {
+    console.log(e)
+}
 
 backTop();
 
@@ -133,5 +172,23 @@ function menuToggle() {
         document.getElementById("main-navigation").style.display = "block"
         document.getElementById("nav-icon").style.display = "block"
         document.getElementById("nav-icon-close").style.display = "none"
+    }
+}
+
+function isOnViewport(obj) {
+    try {
+        let getElementTopLeft = (obj) => {
+            let top = 0;
+            let left = 0;
+            while (obj) {
+                top += obj.offsetTop;
+                left += obj.offsetLeft;
+                obj = obj.offsetParent;
+            }
+            return {top: top, left: left};
+        }
+        return getElementTopLeft(obj).top + obj.clientHeight > window.pageYOffset && window.pageYOffset + window.innerHeight > getElementTopLeft(obj).top;
+    } catch (e) {
+        console.log(e)
     }
 }

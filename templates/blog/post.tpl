@@ -29,10 +29,9 @@
                 </div>
             </section>
         </div>
-        {{ template "footer.tpl" }}
     </div>
+    {{ template "footer.tpl" }}
     </body>
-    <script type="text/javascript" src="/static/blog/js/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="/static/blog/js/quanee.js"></script>
     <script src="/static/blog/js/prism.js"></script>
 {{/*    <script>hljs.initHighlightingOnLoad();</script>*/}}

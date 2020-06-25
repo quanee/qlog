@@ -12,7 +12,7 @@
                 <article class="blog-index" id="index-article">
                     {{ template "article.tpl" . }}
                 </article>
-                <div class="pagination">
+                <div class="pagination" id="pagination">
                     <div id="loadmore">
                         <div class="google-loader">
                             <div class="dot blue"></div>

@@ -3,7 +3,7 @@
 {{/*        <dt></dt>*/}}
 {{/*        <dd></dd>*/}}
 {{/*    </progress>*/}}
-    <div class="backtop" id="backtop" title="返回顶部">
+    <div class="backtop fade" id="backtop" title="返回顶部">
             <span>
                 <i class="material-icons" id="back_top_i">arrow_upward</i>
             </span>

@@ -1,6 +1,6 @@
 window.onload = function () {
-    let hour_opts = `<input class="selectopt option-input" name="hour" type="radio" id="hour_opt0" checked>
-  <label for="hour_opt0" class="option">00</label>`;
+    let hour_opts = `<input class="selectopt option-input" name="hour" type="radio" id="hour_opt0" checked>` + 
+    `<label for="hour_opt0" class="option">00</label>`;
     // `<option value="0" selected="selected">`+`0`.padStart(2, "0")+`</option>`;
     for (let i = 1; i < 24; i++) {
         hour_opts += `<input class="selectopt option-input" name="hour" type="radio" id="hour_opt` + i.toString() + `">

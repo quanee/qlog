@@ -448,7 +448,7 @@
     }
 
     #mdhtml pre {
-        background-color: rgba(40, 49, 66, 1);
+        background-color: var(--dark-lvl-600);
         color: #eceff1;
     }
 
@@ -468,11 +468,11 @@
 
     #mdhtml blockquote {
         color: rgba(232, 234, 237, 1);
-        background-color: rgba(40, 49, 66, 1);
+        background-color: var(--dark-lvl-600);
     }
 
     #mdhtml code {
-        background-color: rgba(40, 49, 66, 1);
+        background-color: var(--dark-lvl-600);
         color: #eceff1;
     }
 }

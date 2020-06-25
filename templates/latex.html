@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width">
+    <title>MathJax v3 with TeX input and SVG output</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+        MathJax = {
+            tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]},
+            svg: {fontCache: 'global'}
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+<div class="backtop" id="backtop" title="返回顶部" style="display: none;">
+            <span>
+                <i class="material-icons" id="back_top_i">arrow_upward</i>
+            </span>
+</div>
+<nav class="local-nav">
+    <div class="ln-wrapper" id="ln-wrapper">
+        <div class="ln-content">
+            <div class="ln-menu">
+                <div id="ln-menu-tray" class="ln-menu-tray nav-menu-tran">
+                    <a onclick="menuToggle()">
+                        <div id="nav-icon" class="nav-icon" onselectstart="return false;">
+                            <i class="material-icons">menu</i>
+                        </div>
+                    </a>
+                    <a onclick="menuToggle()">
+                        <div id="nav-icon-close" class="nav-icon-close" onselectstart="return false;">
+                            <i class="material-icons">close</i>
+                        </div>
+                    </a>
+                    <ul id="main-navigation">
+                        <li><a class="nav-item" href="/blog/">博客</a></li>
+                        <li><a class="nav-item" href="#/about">关于</a></li>
+                        <li><a class="nav-item" href="#/about">关于</a></li>
+                        <li><a class="nav-item" href="/tool/">工具</a></li>
+                        <li><div class="search-outline">
+                                <div class="input-outline">
+                                    <div>
+                                        <input id="search-input" class="search-input">
+                                    </div>
+                                </div>
+                                <div class="search-button-outline">
+                            <span>
+                                <i class="material-icons search" id="search-btn">search</i>
+                            </span>
+                                </div>
+                            </div></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="post-nav-title" class="nav-title nav-title-tran">
+            <div class="inner-nav-title">非对称加密算法</div>
+        </div>
+    </div>
+</nav>
+
+<div class="body">
+    <div id="main">
+        <section id="content">
+            <div class="article">
+                <article>
+                    <header>
+                        <p class="meta">
+                            <time class="datetime" datetime="04 Nov 19" data-updated="true">04 Nov 19</time>
+                        </p>
+                        <h1 class="entry-title">非对称加密算法</h1>
+                    </header>
+                    <div class="entry-content">
+                        <div id="mdhtml" class="mdhtml"><h1>非对称加密</h1>
+                            <h2>RSA</h2>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>步骤</th>
+                                    <th>说明</th>
+                                    <th>描述</th>
+                                    <th>备注</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>找出质数</td>
+                                    <td>P 、Q</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>计算公共模数</td>
+                                    <td>N = P * Q</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>欧拉函数</td>
+                                    <td>$$φ(N) = (P-1)(Q-1)$$</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>计算公钥E</td>
+                                    <td>1 &lt; E &lt; φ(N)</td>
+                                    <td>E的取值必须是整数E和 φ(N) 必须是互质数</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>计算私钥D</td>
+                                    <td>E * D % φ(N) = 1</td>
+                                    <td>$$E*D-φ(N)*Y=1$$ 扩展欧几里德算法</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>加密</td>
+                                    <td>C ＝ M E mod N</td>
+                                    <td>C：密文 M：明文</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>解密</td>
+                                    <td>M ＝C D mod N</td>
+                                    <td>C：密文 M：明文</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <blockquote>
+                                <ol>
+                                    <li>质数P=3，Q=11</li>
+                                    <li>N=P*Q=3*11=33</li>
+                                    <li>欧拉函数$$φ(N)=(P-1)(Q-1)=2*10=20$$</li>
+                                    <li>公匙E: $$1 &lt; E &lt; φ(N)$$ $$E∈{3, 7, 9, 11, 13, 17, 19}$$, 取E=3 E与φ(N)互质</li>
+                                    <li>私匙 $$E<em>D%φ(N)=1\ \ 3</em>D%20=1\  D=7$$扩展欧几里德</li>
+                                    <li>公匙加密$$M=3$$，密文$$C=M^EmodN$$ $$C=3^3%33=27$$</li>
+                                    <li>私匙解密$$M=C^DmodN$$ $$M=27^7%33=3$$</li>
+                                </ol>
+                            </blockquote>
+                            <h2>椭圆曲线DSA</h2>
+                            <p></p><figure><img loading="lazy" src="assets/106_6.png" alt=""><figcaption></figcaption></figure><p></p>
+                            <ol>
+                                <li>Alice 向 Bob 发送两个质数 P 和 G
+                                    P 是一个非常大的质数，G 是一个较小的数字，称为生成元。P 和 G 可以公开，P 和 G 的生成也可以由任何一方生成。</li>
+                                <li>Alice 生成一个随机数 A
+                                    A 是 1~(P-2) 之间的整数。这个数只有 Alice 知道。</li>
+                                <li>Bob 生成一个随机数 B
+                                    B 是 1~(P-2) 之间的整数。这个数只有 Bob 知道。</li>
+                                <li>Alice 把 (G^A mod P) 的结果发送给 Bob
+                                    这个数被窃听了也没有关系。</li>
+                                <li>Bob 把 (G^B mod P) 的结果发送给 Alice
+                                    这个数被窃听了也没有关系。</li>
+                                <li>Alice 用 Bob 发过来的数计算 A 次方并求 mod P
+                                    这个数就是最终的共享密钥。</li>
+                            </ol>
+                            <pre class=" language-c"><code class=" language-c"><span class="token punctuation">(</span>G<span class="token operator">^</span>B mod P<span class="token punctuation">)</span><span class="token operator">^</span>A mod P <span class="token operator">=</span> G<span class="token operator">^</span><span class="token punctuation">(</span>B<span class="token operator">*</span>A<span class="token punctuation">)</span> mod P
+                    <span class="token operator">=</span> G<span class="token operator">^</span><span class="token punctuation">(</span>A<span class="token operator">*</span>B<span class="token punctuation">)</span> mod P
+</code></pre>
+                            <ol>
+                                <li>Bob 用 Alice 发过来的数计算 B 次方并求 mod P
+                                    这个数就是最终的共享密钥。</li>
+                            </ol>
+                            <pre class=" language-c"><code class=" language-c"><span class="token punctuation">(</span>G<span class="token operator">^</span>A mod P<span class="token punctuation">)</span><span class="token operator">^</span>B mod P <span class="token operator">=</span> G<span class="token operator">^</span><span class="token punctuation">(</span>A<span class="token operator">*</span>B<span class="token punctuation">)</span> mod P
+</code></pre>
+                            <p>至此，A 和 B 计算出来的密钥是一致的。</p>
+                            <p>窃听者能获取到的信息有：P、G、G^A mod P、G^B mod P。通过这 4 个值想计算出 G^(A*B) mod P 是非常困难的。</p>
+                            <p>如果能知道 A 和 B 任意一个数，就可以破解上面所有步骤，并算出最后的共享密钥。但是窃听者只能获取到 G^A mod P、G^B mod  P，这里的 mod P 是关键，如果是知道 G^A 也可以算出 A，但是这里是推算不出 A 和 B 的，因为这是有限域(finite  field) 上的<strong>离散对数问题</strong></p>
+                            <h4><strong>eg.</strong></h4>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>x</th>
+                                    <th>x</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Alice和Bob同意使用模数$$p=23$$和基数$$g=5$$（这是一个原始根模 23）。</td>
+                                    <td>$$p=23\ \ g=5$$</td>
+                                </tr>
+                                <tr>
+                                    <td>Alice选择一个秘密整数$$a=4$$，然后发送Bob $$A=g^amodp$$</td>
+                                    <td>$$A = 5^4mod 23 = 4$$</td>
+                                </tr>
+                                <tr>
+                                    <td>Bob选择一个秘密整数$$b=3$$，然后发送Alice $$B=g^bmodp$$</td>
+                                    <td>$$B = 5^3mod 23 = 10$$</td>
+                                </tr>
+                                <tr>
+                                    <td>Alice计算$$s=B^a mod p$$</td>
+                                    <td>$$s =10^4 mod23= 18$$</td>
+                                </tr>
+                                <tr>
+                                    <td>Bob计算$$s=A^bmodp$$</td>
+                                    <td>$$s=4^3mod23=18$$</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <footer>
+                    </footer>
+                </article>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="foot">Copyright © 2018 Quanee -
+            <span class="credit">Powered by <a href="http://w3cschool.org/">Web</a></span>
+        </div>
+    </footer>
+
+</div>
+
+<script type="text/javascript" src="/static/blog/js/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="/static/blog/js/quanee.js"></script>
+<script src="/static/blog/js/prism.js"></script>
+
+
+<div style="position: fixed; right: 42px; bottom: 11px; padding: 5px 12px; font-size: 10px; line-height: 1; color: rgb(255, 255, 255); background: rgb(76, 173, 231); border-radius: 4px; opacity: 0; transition-duration: 300ms;">加载中~</div>
+
+</body>
+</html>

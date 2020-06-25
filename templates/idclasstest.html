@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>localStorage Performance Test</title>
+</head>
+<body>
+
+<ul id="app"></ul>
+
+<script>
+    // Variables
+    let app = document.getElementById('app');
+    let count = 10000;
+    let elem;
+
+    // Create elements
+    for (let i = 0; i < count; i++) {
+
+        // Create element
+        elem = document.createElement('li');
+        elem.textContent = 'List Item ' + i;
+
+        // Add ID, class, and data attribute
+        elem.id = 'list-item-' + i;
+        elem.className = 'list-item';
+        elem.setAttribute('data-item', i);
+
+        // Inject into the DOM
+        app.appendChild(elem);
+
+    }
+
+
+    /**
+     * Start Performance Tests
+     */
+
+    let start, end;
+
+
+    //
+    // By Class
+    //
+
+    start = performance.now();
+    let byClass = document.querySelectorAll('.list-item');
+    end = performance.now();
+    console.log('By class took ' + (end - start) + 'ms.');
+
+
+    //
+    // By Data Attribute
+    //
+
+    start = performance.now();
+    let byClass = document.querySelectorAll('[data-item]');
+    end = performance.now();
+    console.log('By data attribute took ' + (end - start) + 'ms.');
+
+</script>
+
+</body>
+</html>
