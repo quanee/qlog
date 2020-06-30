@@ -4,7 +4,6 @@ import (
 	"github.com/quanee/draft"
 	"github.com/quanee/qlog/database"
 	"github.com/quanee/qlog/logic/bloglogic"
-	"github.com/quanee/qlog/utils/http2"
 	"github.com/quanee/qlog/utils/log"
 	"github.com/quanee/qlog/utils/md2html"
 	"net/http"
@@ -14,7 +13,7 @@ import (
 )
 
 func Post(context *draft.Context) {
-	http2.Push(context.Writer, "/static/blog/css/quanee.css", "/static/blog/js/quanee.js", "/static/favicon.webp")
+	//http2.Push(context.Writer, "/static/blog/css/quanee.css", "/static/blog/js/quanee.js", "/static/favicon.webp")
 	log.Print(strings.Split(context.Req.RequestURI, "/"))
 	//id := context.Query("id")
 	id := context.QueryParam("param")

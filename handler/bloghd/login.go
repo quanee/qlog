@@ -32,10 +32,6 @@ func Login(c *draft.Context) {
 		} else {
 			//不存在token报错
 		}
-		//fmt.Println("username length:", len(r.Form["username"][0]))
-		//fmt.Println("username:", template.HTMLEscapeString(r.Form.Get("username"))) //输出到服务器端
-		//fmt.Println("password:", template.HTMLEscapeString(r.Form.Get("password")))
-		//template.HTMLEscape(w, []byte(r.Form.Get("username"))) //输出到客户端
 	}
 	cookie := http.Cookie{
 		Name:     "cookie",
