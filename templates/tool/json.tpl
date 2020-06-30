@@ -7,6 +7,7 @@
     <link href="/static/tool/css/tool.css" rel="stylesheet" type="text/css" media="all"/>
 </head>
 <body>
+{{ template "tnav.tpl" . }}
 <div class="body">
     <button class="btn" id="format-json">格式化</button>
     <button class="btn" id="compass-json">压缩</button>

@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="text/css" href="/static/tool/css/tool.css"/>
     </head>
     <body>
+    {{ template "tnav.tpl" . }}
     <div class="body">
         <div>
             <div>

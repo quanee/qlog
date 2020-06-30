@@ -8,6 +8,7 @@
     <script src="/static/tool/js/tool.js"></script>
 </head>
 <body>
+{{ template "tnav.tpl" . }}
     <div class="body" id="body">
         <div id="time">
             <div name="hour" id="select_hour" class="select" tabindex="1"></div>

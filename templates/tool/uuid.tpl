@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="/static/tool/css/tool.css" type="text/css">
     </head>
     <body>
+    {{ template "tnav.tpl" . }}
     <div class="body">
         <label id="gen-uuid" class="btn">生成</label>
         <br>

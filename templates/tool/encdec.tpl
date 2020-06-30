@@ -7,6 +7,7 @@
     <link href="/static/tool/css/tool.css" rel="stylesheet" type="text/css" media="all"/>
 </head>
 <body>
+{{ template "tnav.tpl" . }}
 <div class="body">
     <button id="url-enc" class="btn">URL编码</button>
     <button id="url-dec" class="btn">URL解码</button>

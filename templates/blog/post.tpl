@@ -24,6 +24,11 @@
                             <div id="mdhtml" class="mdhtml">{{ .article.Substance | html }}</div>
                         </div>
                         <footer>
+                            <div class="entry-tags">
+                                {{ range $s, $t := .article.Tags }}
+                                    <a class="entry-tag" href="/tags/{{ $t }}"><font>{{ $t }}</font></a>
+                                {{ end }}
+                            </div>
                         </footer>
                     </article>
                 </div>
