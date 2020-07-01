@@ -26,7 +26,6 @@
         {{ template "footer.tpl" }}
     </div>
     </body>
-    <script src="../../static/blog/js/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="../../static/admin/js/aquanee.js"></script>
     </html>
 {{ end }}

@@ -218,7 +218,25 @@ try {
     let stop = false;
     document.getElementById("stop").onclick = function () {
         stop = !stop;
+        switchBtn()
         tick();
+    }
+    document.getElementById("continue").onclick = function () {
+        stop = !stop;
+        switchBtn()
+        tick();
+    }
+
+    function switchBtn() {
+        let stp = document.getElementById("stop");
+        let cnt = document.getElementById("continue")
+        if (stp.style.display !== "block") {
+            stp.style.display = "block";
+            cnt.style.display = "none";
+        } else {
+            stp.style.display = "none";
+            cnt.style.display = "block";
+        }
     }
     window.onload = function () {
         try {

@@ -2,7 +2,7 @@
     <!DOCTYPE html>
     <html class="js video" lang="en">
     <head>
-        {{ template "header.tpl" . }}
+        {{ template "admin/header.tpl" . }}
         <link href="/static/admin/css/aquanee.css" media="screen, projection" rel="stylesheet" type="text/css">
     </head>
     <body>

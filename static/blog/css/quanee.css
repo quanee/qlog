@@ -552,6 +552,10 @@ body {
     line-height: 46px;
     float: left;
     display: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .local-nav {

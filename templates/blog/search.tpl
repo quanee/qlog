@@ -27,11 +27,6 @@
     {{ template "footer.tpl" }}
 </div>
 </body>
-{{ if eq .env "release" }}
-<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-{{ else }}
-<script type="text/javascript" src="../../static/blog/js/jquery-3.4.1.js"></script>
-{{ end }}
 <script type="text/javascript" src="../../static/blog/js/quanee.js"></script>
 </html>
 {{ end }}

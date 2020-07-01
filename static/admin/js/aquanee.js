@@ -91,8 +91,18 @@ function login() {
     ).then(
         res => {
             if (res["msg"] === "success") {
-                // window.location.replace(["path"])
+                window.localStorage.setItem("token", res["token"]);
+                window.history.pushState("", "", res["path"]);
+                window.location.reload();
             }
         }
     )
+}
+
+try {
+    window.addEventListener("hashchange", () => {
+
+    }, false)
+} catch (e) {
+    console.log(e)
 }

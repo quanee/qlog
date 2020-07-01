@@ -1,16 +1,16 @@
 function backTop() {
-    let scrolltop = [];
-    let i = 0;
+    let scrolltop = 0;
+    let t = 0;
     scrolltop[0] = 0;
     document.onscroll = () => {
-        i++;
-        scrolltop[i] = window.pageYOffset;
-        if (scrolltop[i] > scrolltop[i - 1]) {
+        scrolltop = window.pageYOffset;
+
+        if (t > scrolltop) {
             document.getElementById('backtop').classList.remove('fadein')
-            // document.getElementById("backtop").
         } else {
             document.getElementById('backtop').classList.add('fadein')
         }
+        t = scrolltop
     };
 
     document.getElementById("backtop").onclick = () => {
@@ -137,7 +137,6 @@ try {
             let windowTop = 0;
             // 获取当前可视区域距离页面顶端的距离
             let scrolls = window.pageYOffset;
-            console.log(scrolls, );
             // 当scrolls>windowTop时，表示页面在向下滑动
             if ((scrolls >= windowTop) && (scrolls > 110)) {
                 //需要执行隐藏导航的操作
