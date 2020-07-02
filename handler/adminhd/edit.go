@@ -11,7 +11,7 @@ import (
 
 func Edit(context *draft.Context) {
 	//http2.Push(context.Writer, "/static/css/aquanee.css", "/static/js/aquanee.js", "/static/favicon.webp")
-	id := context.QueryParam("param")
+	id := context.QueryParam()
 	article := bloglogic.QueryOneArticleById(database.DB, id)
 	context.HTML(http.StatusOK, "admin/edit.tpl", draft.H{
 		"title":       fmt.Sprintf("编辑-%s", article.Title),

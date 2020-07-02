@@ -10,7 +10,7 @@ import (
 )
 
 func Search(context *draft.Context) {
-	words := context.QueryParam("param")
+	words := context.QueryParam()
 	articles, err := bloglogic.SearchArticle(database.DB, words)
 	if err != nil {
 		log.Errorf("Search error", err)

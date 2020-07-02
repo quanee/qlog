@@ -16,5 +16,11 @@
     </div>
     </body>
     <script src="/static/tool/js/tool.js"></script>
+    <script>
+        document.getElementById("gen-uuid").addEventListener("click", genID, false);
+        function genID() {
+            document.getElementById("uuid-box").innerHTML += "<li><input value='" + uuid() + "'/><span aria-label='复制' type='button' onclick='copyToClipBord(this.previousElementSibling.value)'>c</span></li>"
+        }
+    </script>
     </html>
 {{ end }}

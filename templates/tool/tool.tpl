@@ -7,6 +7,7 @@
         <link type="text/css" rel="stylesheet" href="/static/tool/css/tool.css">
     </head>
     <body>
+    {{ template "tnav.tpl" . }}
     <div class="contains">
         <div class="col">
             <div class="card"><a href="/timestamp/">时间戳</a></div>

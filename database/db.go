@@ -2,8 +2,8 @@ package database
 
 import (
 	"database/sql"
-	"sync"
+	"github.com/go-redis/redis/v8"
 )
 
 var DB *sql.DB
-var once sync.Once
+var RedisDB *redis.Client

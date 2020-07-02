@@ -128,6 +128,22 @@ func QueryOneArticleById(db *sql.DB, id string) blogmodel.Article {
 	if terr != nil {
 		log.Error("Parser time error ")
 	}
+
+	tagsarr := make([]string, 0)
+	tags, err := db.Query(fmt.Sprintf("SELECT tag FROM tags WHERE tags.id IN (SELECT tag_id FROM tsid WHERE tsid.summary_id=%s);", id))
+	if err != nil {
+		log.Error("Query tags error ")
+	} else {
+		for tags.Next() {
+			tag := ""
+			err = tags.Scan(&tag)
+			if err != nil {
+				log.Error("Query tags error ")
+			}
+			tagsarr = append(tagsarr, tag)
+		}
+	}
+	article.Tags = tagsarr
 	article.CreatedTime = fmt.Sprint(timeParse.Format("02 Jan 06"))
 	log.Print("Query One Article By Id = ", id)
 	return article

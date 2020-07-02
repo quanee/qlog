@@ -5,7 +5,7 @@
                 <p class="meta">
                     <time class="datetime">{{ $v.CreatedTime }}</time>
                 </p>
-                <h1 class="entry-title">
+                <h1 title="{{ $v.Title }}" class="entry-title">
                     <a href="/post/{{ $v.SId }}">{{ $v.Title }}</a>
                 </h1>
             </header>

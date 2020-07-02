@@ -6,10 +6,12 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/quanee/qlog/config"
 	"github.com/quanee/qlog/utils/log"
+	"sync"
 	"time"
 )
 
 func init() {
+	var once sync.Once
 	if config.GetKey("use_database") == "mysql" {
 		once.Do(func() {
 			dsn := fmt.Sprintf("%s:%s@%s(%s:%s)/%s",

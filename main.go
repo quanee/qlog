@@ -55,6 +55,7 @@ func main() {
 	r.GET("/article", bloghd.GetArticle)
 	r.GET("/search/*", bloghd.Search)
 	r.POST("/search/*", bloghd.Search)
+
 	r.GET("/tool/", toolhd.Tool)
 	r.GET("/fq/", toolhd.Fq)
 	r.GET("/uuid/", toolhd.UUID)
@@ -62,6 +63,10 @@ func main() {
 	r.GET("/color/", toolhd.Color)
 	r.GET("/timestamp/", toolhd.Timestamp)
 	r.GET("/encdec/", toolhd.Encdec)
+	r.GET("/icon/", toolhd.Icon)
+	r.POST("/clip/update", toolhd.ClipUpdate)
+	r.GET("/clip/", toolhd.Clip)
+	r.GET("/clip/*", toolhd.ClipGet)
 
 	admin := r.Group("/admin")
 	admin.Use(adminmw.Auth())

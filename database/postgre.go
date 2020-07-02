@@ -6,10 +6,12 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/quanee/qlog/config"
 	"github.com/quanee/qlog/utils/log"
+	"sync"
 	"time"
 )
 
 func init() {
+	var once sync.Once
 	if config.GetKey("use_database") == "postgresql" {
 		once.Do(func() {
 			dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",

@@ -16,7 +16,7 @@ func Post(context *draft.Context) {
 	//http2.Push(context.Writer, "/static/blog/css/quanee.css", "/static/blog/js/quanee.js", "/static/favicon.webp")
 	log.Print(strings.Split(context.Req.RequestURI, "/"))
 	//id := context.Query("id")
-	id := context.QueryParam("param")
+	id := context.QueryParam()
 	article := bloglogic.QueryOneArticleById(database.DB, id)
 
 	substance, err := md2html.MD2HTML(StrToBytes(article.Substance))
