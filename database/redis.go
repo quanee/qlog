@@ -13,9 +13,7 @@ var ctx = context.Background()
 
 func init() {
 	var once sync.Once
-	fmt.Println("#########################################################################")
 	once.Do(func() {
-		fmt.Println("#########################################################################")
 		RedisDB = redis.NewClient(&redis.Options{
 			Addr:     fmt.Sprintf("%s:%s", config.GetKey("REDIS_HOST"), config.GetKey("REDIS_PORT")),
 			Password: "", // no password set
