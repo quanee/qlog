@@ -125,6 +125,7 @@ body {
     padding: 0;
     border: 0;
     -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
     font: 400 16px/24px Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
 }
 

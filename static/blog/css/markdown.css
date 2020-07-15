@@ -2,7 +2,7 @@
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     color: #000;
-    font: 400 16px/24px Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
+    font: 400 16px/24px Roboto, Noto Sans, Noto Serif CJK SC, sans-serif;
     font-size: 1.7rem;
     word-wrap: break-word;
     text-rendering: optimizeSpeed;
@@ -36,14 +36,14 @@
     margin-top: 24px;
     border-bottom: 0;
     padding-bottom: .3em;
-    font: 400 24px/32px Google Sans, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
+    font: 400 24px/32px Google Sans, Noto Sans, Noto Serif CJK SC, sans-serif;
 
 }
 
 #mdhtml h3 {
     margin-bottom: 16px;
     margin-top: 24px;
-    font: 400 24px/32px Google Sans, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
+    font: 400 24px/32px Google Sans, Noto Sans, Noto Serif CJK SC, sans-serif;
 }
 
 #mdhtml h4 {
@@ -136,7 +136,7 @@
 }
 
 #mdhtml pre {
-    font: 400 16px/24px Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
+    font: 400 16px/24px Roboto, Noto Sans, Noto Serif CJK SC, sans-serif;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     /*font-family: "Sarasa Term SC", Consolas, Liberation Mono, Menlo, Courier, monospace;*/
@@ -365,7 +365,7 @@
 }
 
 #mdhtml pre > code {
-    font: 400 16px/24px Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
+    font: 400 16px/24px Roboto, Noto Sans, Noto Serif CJK SC, sans-serif;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     white-space: pre;
