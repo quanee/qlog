@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    -webkit-tap-highlight-color: transparent;
 }
 
 a {
@@ -203,7 +204,7 @@ li {
 
 .contains {
     width: 990px;
-    margin: 0 auto;
+    margin: 60px auto;
     box-sizing: border-box;
 }
 
@@ -301,6 +302,152 @@ li {
     height: 300px;
     margin: 70px 0 0 70px;
 }
+
+/* pomodoro */
+.pomodoro-body {
+    margin: 0;
+    padding: 0 0 12px 0;
+    border: 0;
+    background-color: rgb(240, 91, 86);
+    color: rgba(255, 255, 255, 1);
+    user-select: none;
+    position: relative;
+    min-height: 1008px;
+    width: 100%;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 300ms ease-in-out 0s;
+    outline: none;
+}
+
+.pomodoro-main {
+    background-color: rgb(239, 239, 239);
+    font-size: 16px;
+    box-shadow: none;
+    color: rgb(85, 85, 85);
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 10px;
+    border-style: none;
+    outline: none;
+    max-width: 100px;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 47px;
+    padding-bottom: 30px;
+    font-family: "Sarasa Term SC", monospace;
+}
+
+.clock-contain {
+    max-width: 620px;
+    padding: 0 12px;
+    margin: auto;
+}
+
+.clock {
+    max-width: 480px;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.1);
+    width: 100%;
+    padding: 20px 0 30px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+#timer-string {
+    font-family: "Sarasa Term SC", monospace;
+    font-weight: bold;
+    font-size: 120px;
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.clock-btn {
+    font-family: "PingFang SC Light", monospace;
+    font-size: 16px;
+    height: 28px;
+    cursor: pointer;
+    box-shadow: none;
+    opacity: 1;
+    font-weight: bold;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    margin: 0;
+    color: rgba(255, 255, 255, 1);
+    background: none rgba(0, 0, 0, 0);
+    border-radius: 4px;
+    padding: 2px 12px;
+    outline: none;
+}
+
+.clock-btn-active {
+    background: none rgba(0, 0, 0, 0.15);
+}
+
+.clock-setting {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+#target {
+    min-height: 1008px;
+    width: 100%;
+    padding-top: 160px;
+}
+
+.work-bg {
+    background-color: rgb(240, 91, 86);
+    transition: background-color 300ms ease-in-out 0s;
+}
+
+.short-bg {
+    background-color: rgb(76, 166, 169);
+    transition: background-color 300ms ease-in-out 0s;
+}
+
+.long-bg {
+    background-color: rgb(73, 143, 193);
+    transition: background-color 300ms ease-in-out 0s;
+}
+
+.start {
+    cursor: pointer;
+    font-size: 22px;
+    height: 55px;
+    color: rgb(240, 91, 86);
+    font-weight: bold;
+    width: 200px;
+    background-color: white;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    margin: 20px 0 0;
+    padding: 0 12px;
+    border-radius: 4px;
+    transition: color 300ms ease-in-out 0s;
+    outline: none;
+}
+
+.wstart {
+    color: rgb(240, 91, 86);
+}
+
+.sbstart {
+    color: rgb(76, 166, 169);
+}
+
+.lbstart {
+    color: rgb(73, 143, 193);
+}
+/* end pomodoro */
 
 @supports ((-webkit-backdrop-filter: saturate(180%) blur(20px)) or (backdrop-filter: saturate(180%) blur(20px))) {
     .ln-wrapper {
