@@ -16,5 +16,13 @@
 </div>
 </body>
 <script src="/static/tool/js/tool.js"></script>
+<script>
+    try {
+        document.getElementById("format-json").addEventListener("click", formatJson, false);
+        document.getElementById("compass-json").addEventListener("click", campassJson, false);
+    } catch (e) {
+        console.log(e);
+    }
+</script>
 </html>
 {{ end }}

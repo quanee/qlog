@@ -19,6 +19,21 @@
 </div>
 </body>
 <script src="/static/tool/js/tool.js"></script>
+<script>
+    document.getElementById("url-enc").onclick = () => {
+        document.getElementById("input-content").value = encodeURIComponent(document.getElementById("input-content").value);
+    }
+    document.getElementById("url-dec").onclick = () => {
+        document.getElementById("input-content").value = decodeURIComponent(document.getElementById("input-content").value);
+    }
+    document.getElementById("base64-enc").onclick = () => {
+        document.getElementById("input-content").value = Base64.encode(document.getElementById("input-content").value);
+    }
+    document.getElementById("base64-dec").onclick = () => {
+        document.getElementById("input-content").value = Base64.decode(document.getElementById("input-content").value);
+    }
+    document.getElementById("md5sum").onclick = () => {}
+</script>
 </html>
 
 {{ end }}

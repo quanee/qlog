@@ -134,6 +134,8 @@
     </body>
     <script src="/static/tool/js/tool.js"></script>
     <script>
+        document.getElementById("input-color").addEventListener("input", convertColor, false)
+
         window.onload = () => {
             document.getElementById("input-color").value = "rgb(66, 133, 244)";
             document.getElementsByClassName("display-color")[0].style.backgroundColor = document.getElementById("input-color").value;

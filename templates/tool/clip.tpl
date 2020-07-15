@@ -81,6 +81,7 @@
     <title>Clip</title>
 </head>
 <body>
+{{ template "tnav.tpl" . }}
 <div class="body">
     <div class="toolbar">
         <button id="save" class="btn" title="保存">

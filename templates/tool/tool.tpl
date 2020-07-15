@@ -10,22 +10,22 @@
     {{ template "tnav.tpl" . }}
     <div class="contains">
         <div class="col">
-            <div class="card"><a href="/timestamp/">时间戳</a></div>
+            <div class="card"><a href="/timestamp/" target="_blank">时间戳</a></div>
         </div>
         <div class="col">
-            <div class="card"><a href="/color/">颜色转换</a></div>
+            <div class="card"><a href="/color/" target="_blank">颜色转换</a></div>
         </div>
         <div class="col">
-            <div class="card"><a href="/encdec/">编码解码</a></div>
+            <div class="card"><a href="/encdec/" target="_blank">编码解码</a></div>
         </div>
         <div class="col">
-            <div class="card"><a href="/json/">json美化压缩</a></div>
+            <div class="card"><a href="/json/" target="_blank">json美化压缩</a></div>
         </div>
         <div class="col">
-            <div class="card"><a href="/uuid/">生成UUID</a></div>
+            <div class="card"><a href="/uuid/" target="_blank">生成UUID</a></div>
         </div>
         <div class="col">
-            <div class="card"><a href="/fq/">番茄钟</a></div>
+            <div class="card"><a href="/pomodoro/" target="_blank">番茄钟</a></div>
         </div>
     </div>
     </body>
