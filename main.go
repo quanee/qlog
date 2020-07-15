@@ -57,7 +57,7 @@ func main() {
 	r.POST("/search/*", bloghd.Search)
 
 	r.GET("/tool/", toolhd.Tool)
-	r.GET("/fq/", toolhd.Fq)
+	r.GET("/pomodoro/", toolhd.Pomodoro)
 	r.GET("/uuid/", toolhd.UUID)
 	r.GET("/json/", toolhd.Json)
 	r.GET("/color/", toolhd.Color)
