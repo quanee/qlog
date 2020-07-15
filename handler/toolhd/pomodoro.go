@@ -5,8 +5,8 @@ import (
 	"net/http"
 )
 
-func Fq(context *draft.Context) {
-	context.HTML(http.StatusOK, "fq.tpl", draft.H{
+func Pomodoro(context *draft.Context) {
+	context.HTML(http.StatusOK, "pomodoro.tpl", draft.H{
 		"title": "番茄钟",
 	})
 }
