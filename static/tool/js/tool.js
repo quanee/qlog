@@ -1,94 +1,4 @@
-window.onload = function () {
-    let hour_opts = `<input class="selectopt option-input" name="hour" type="radio" id="hour_opt0" checked>` + 
-    `<label for="hour_opt0" class="option">00</label>`;
-    // `<option value="0" selected="selected">`+`0`.padStart(2, "0")+`</option>`;
-    for (let i = 1; i < 24; i++) {
-        hour_opts += `<input class="selectopt option-input" name="hour" type="radio" id="hour_opt` + i.toString() + `">
-  <label for="hour_opt` + i.toString() + `" class="option">` + i.toString().padStart(2, "0") + `</label>`;
-        // res += `<option value="`+i.toString()+`">`+i.toString().padStart(2, "0")+`</option>`
-    }
-    document.getElementById("select_hour").innerHTML = hour_opts;
-
-    let minute_opts = `<input class="selectopt option-input" name="minute" type="radio" id="minute_opt0" checked>
-  <label for="minute_opt0" class="option">00</label>`;
-    for (let i = 1; i < 60; i++) {
-        minute_opts += `<input class="selectopt option-input" name="minute" type="radio" id="minute_opt` + i.toString() + `">
-  <label for="minute_opt` + i.toString() + `" class="option">` + i.toString().padStart(2, "0") + `</label>`;
-    }
-    document.getElementById("select_minute").innerHTML = minute_opts;
-
-    let second_opts = `<input class="selectopt option-input" name="second" type="radio" id="second_opt0" checked>
-  <label for="second_opt0" class="option">00</label>`;
-    for (let i = 1; i < 60; i++) {
-        second_opts += `<input class="selectopt option-input" name="second" type="radio" id="second_opt` + i.toString() + `">
-  <label for="second_opt` + i.toString() + `" class="option">` + i.toString().padStart(2, "0") + `</label>`;
-    }
-    document.getElementById("select_second").innerHTML = second_opts;
-};
-
-async function timer(countSec) {
-    let curhour = Math.floor(countSec / 3600);
-    let curminute = Math.floor(countSec / 60 % 60);
-    let cursecond = Math.floor(countSec % 60);
-    document.getElementById("full_time_hour").innerHTML = Math.floor(countSec / 3600).toString().padStart(2, "0");
-    document.getElementById("full_time_minute").innerHTML = Math.floor(countSec / 60 % 60).toString().padStart(2, "0");
-    document.getElementById("full_time_second").innerHTML = Math.floor(countSec % 60).toString().padStart(2, "0");
-    while (true) {
-        if (curhour !== Math.floor(countSec / 3600)) {
-            document.getElementById("full_time_hour").innerHTML = Math.floor(countSec / 3600).toString().padStart(2, "0");
-            curhour = Math.floor(countSec / 3600);
-        }
-        if (curminute !== Math.floor(countSec / 60 % 60)) {
-            document.getElementById("full_time_minute").innerHTML = Math.floor(countSec / 60 % 60).toString().padStart(2, "0");
-            curminute = Math.floor(countSec / 60 % 60);
-        }
-        if (cursecond !== Math.floor(countSec % 60)) {
-            document.getElementById("full_time_second").innerHTML = Math.floor(countSec % 60).toString().padStart(2, "0");
-            cursecond = Math.floor(countSec % 60);
-        }
-        if (countSec === 0) {
-            break;
-        }
-        await (new Promise((resolve) => {
-            countSec--;
-            setTimeout(resolve, 1000);
-        }))
-    }
-}
-
-function start() {
-    document.getElementById("body").style.background = "rgba(255, 100, 0, 1)";
-    let hour = 0, minute = 0, second = 0;
-    for (let i = 0; i < document.getElementById("select_hour").getElementsByTagName("input").length; i++) {
-        if (document.getElementById("select_hour").getElementsByTagName("input")[i].checked) {
-            hour = i
-        }
-    }
-    for (let i = 0; i < document.getElementById("select_minute").getElementsByTagName("input").length; i++) {
-        if (document.getElementById("select_minute").getElementsByTagName("input")[i].checked) {
-            minute = i
-        }
-    }
-    for (let i = 0; i < document.getElementById("select_second").getElementsByTagName("input").length; i++) {
-        if (document.getElementById("select_second").getElementsByTagName("input")[i].checked) {
-            second = i
-        }
-    }
-    timer(hour * 3600 + minute * 60 + second).then(r => {
-        document.getElementById("body").style.background = "rgba(0, 255, 100, 1)";
-        document.getElementsByTagName("label").style.background = "rgba(0, 255, 100, 1)"
-    })
-}
-
-function secToTime(countSec) {
-    return [Math.floor(countSec / 3600), Math.floor(countSec / 60 % 60), Math.floor(countSec % 60)].join(":");
-}
-
-function copy() {
-    window.clipboardData.setData("Text", this.value)
-}
-
-function uuid(delimiter="-") {
+function uuid(delimiter = "-") {
     let s = [];
     const hexDigits = "0123456789abcdef";
     for (let i = 0; i < 36; i++) {
@@ -101,266 +11,246 @@ function uuid(delimiter="-") {
     return s.join("");
 }
 
-try {
-    document.getElementById("format-json").onclick = () => {
-        let msg = document.getElementById("input-json").value.toString();
-        document.getElementById("input-json").value = JSON.stringify(JSON.parse(msg), null, 4);
-    }
-} catch (e) {
-    console.log(e);
+function formatJson() {
+    let msg = document.getElementById("input-json").value.toString();
+    document.getElementById("input-json").value = JSON.stringify(JSON.parse(msg), null, 4);
 }
 
-try {
-    document.getElementById("compass-json").onclick = () => {
-        let msg = document.getElementById("input-json").value.toString();
-        document.getElementById("input-json").value = JSON.stringify(JSON.parse(msg), null, 0);
-    }
-} catch (e) {
-    console.log(e);
+function campassJson() {
+    let msg = document.getElementById("input-json").value.toString();
+    document.getElementById("input-json").value = JSON.stringify(JSON.parse(msg), null, 0);
 }
 
-try {
-    window.onload = () => {
-        document.getElementById("input-rgb").value = "rgb(128, 128, 128)"
-        document.getElementById("input-hex").value = "#808080"
-    }
-    document.getElementById("rgb").onclick = () => {
-        let colorArr = document.getElementById("input-rgb").value.replace(/(?:\(|\)|rgba|RGBA|rgb|RGB)*/g, "").split(",");
-        let ret = "#";
-        for (let i = 0, j = colorArr.length; i < j; i++) {
-            let hex = Number(colorArr[i]).toString(16);
-            if (colorArr[i] < 0) {
-                hex = "0";
-            }
-            if (colorArr[i] > 255) {
-                hex = "FF";
-            }
-            if (colorArr[i] < 15 || hex.length < 2) {
-                hex = "0" + hex;
-            }
-            if (hex === "0") {
-                hex += hex;
-            }
-            ret += hex
+function timestampToDatetime() {
+    try {
+        let its = document.getElementById("input-timestamp")
+        let odt = document.getElementById("output-date")
+        if (its.value.length < "3945600".length) {
+            odt.value = "1970-1-1 0:0:0"
         }
-        document.getElementById("conv-ret").innerHTML = "<li>" + ret.toUpperCase() + "</li>";
+        let ts = new Date(parseInt(its.value) * 1000)
+        odt.value = ts.getFullYear() + "-" + ts.getMonth() + "-" + ts.getDay() + " " + ts.getHours() + ":" + ts.getMinutes() + ":" + ts.getSeconds()
+    } catch (e) {
+        alert(e)
     }
-    document.getElementById("hex").onclick = () => {
-        let ret = "#";
-        let color = document.getElementById("input-hex").value;
-        let reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
-        if (reg.test(color.toLowerCase())) {
-            if (color.length === 4) {
-                for (let i = 1; i < 4; i += 1) {
-                    ret += color.slice(i, i + 1).concat(color.slice(i, i + 1));
-                }
-            } else {
-                ret = color;
-            }
+}
 
-            let colorChange = [];
-            for (let i = 1; i < 7; i += 2) {
-                let tmp = parseInt("0x" + ret.slice(i, i + 2));
-                if (tmp > 0xff) {
-                    tmp = 0xff;
-                } else if (tmp < 0 || isNaN(tmp)) {
-                    tmp = 0;
-                }
-                colorChange.push(tmp);
-            }
+function DatetimeToTimestamp() {
+    try {
+        let idt = document.getElementById("input-date")
+        let ots = document.getElementById("output-timestamp")
+        ots.value = Math.round((new Date(idt.value)).valueOf() / 1000).toString();
+    } catch (e) {
+        alert(e)
+    }
+}
 
-            document.getElementById("conv-ret").innerHTML = "<li>" + "RGB(" + colorChange.join(",") + ")" + "</li>";
+function switchTimestampButton() {
+    let stp = document.getElementById("stop");
+    let cnt = document.getElementById("continue")
+    if (stp.style.display !== "block") {
+        stp.style.display = "block";
+        cnt.style.display = "none";
+    } else {
+        stp.style.display = "none";
+        cnt.style.display = "block";
+    }
+}
+
+function tick() {
+    document.getElementById("timestamp-now").innerText = Math.round((new Date()).valueOf() / 1000).toString();
+    if (!stop) {
+        setTimeout("tick()", 1000)
+    }
+}
+
+;((global, factory) => {
+    typeof exports === 'object' && typeof module !== 'undefined'
+        ? module.exports = factory(global)
+        : typeof define === 'function' && define.amd
+        ? define(factory) : factory(global)
+})(typeof self !== 'undefined' ? self
+    : typeof window !== 'undefined' ? window
+        : typeof global !== 'undefined' ? global
+            : this, (global = {}) => {
+    const _Base64 = global.Base64;
+    const version = "2.6.3";
+    const b64chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+    const b64tab = ((bin) => {
+        const t = {};
+        for (let i = 0, l = bin.length; i < l; i++) t[bin.charAt(i)] = i;
+        return t;
+    })(b64chars);
+    const fromCharCode = String.fromCharCode;
+    const cb_utob = (c) => {
+        if (c.length < 2) {
+            let cc = c.charCodeAt(0);
+            return cc < 0x80 ? c
+                : cc < 0x800 ? (fromCharCode(0xc0 | (cc >>> 6))
+                    + fromCharCode(0x80 | (cc & 0x3f)))
+                    : (fromCharCode(0xe0 | ((cc >>> 12) & 0x0f))
+                        + fromCharCode(0x80 | ((cc >>> 6) & 0x3f))
+                        + fromCharCode(0x80 | (cc & 0x3f)));
         } else {
-            document.getElementById("dialog-bg").style.display = "flex";
+            let cc = 0x10000
+                + (c.charCodeAt(0) - 0xD800) * 0x400
+                + (c.charCodeAt(1) - 0xDC00);
+            return (fromCharCode(0xf0 | ((cc >>> 18) & 0x07))
+                + fromCharCode(0x80 | ((cc >>> 12) & 0x3f))
+                + fromCharCode(0x80 | ((cc >>> 6) & 0x3f))
+                + fromCharCode(0x80 | (cc & 0x3f)));
         }
-    }
+    };
+    const re_utob = /[\uD800-\uDBFF][\uDC00-\uDFFFF]|[^\x00-\x7F]/g;
+    const utob = (u) => u.replace(re_utob, cb_utob);
+    const cb_encode = (ccc) => {
+        const padlen = [0, 2, 1][ccc.length % 3];
 
-    document.getElementById("dialog-bg").onclick = () => {
-        document.getElementById("dialog-bg").style.display = "none";
-    }
-} catch (e) {
-    console.log(e)
-}
+        const ord = ccc.charCodeAt(0) << 16
+            | ((ccc.length > 1 ? ccc.charCodeAt(1) : 0) << 8)
+            | ((ccc.length > 2 ? ccc.charCodeAt(2) : 0));
 
-try {
-    document.getElementById("ts2dt").onclick = function () {
-        try {
-            let its = document.getElementById("input-timestamp")
-            let odt = document.getElementById("output-date")
-            if (its.value.length < "3945600".length) {
-                odt.value = "1970-1-1 0:0:0"
-            }
-            let ts = new Date(parseInt(its.value) * 1000)
-            odt.value = ts.getFullYear() + "-" + ts.getMonth() + "-" + ts.getDay() + " " + ts.getHours() + ":" + ts.getMinutes() + ":" + ts.getSeconds()
-        } catch (e) {
-            alert(e)
-        }
-    }
+        const chars = [
+            b64chars.charAt(ord >>> 18),
+            b64chars.charAt((ord >>> 12) & 63),
+            padlen >= 2 ? '=' : b64chars.charAt((ord >>> 6) & 63),
+            padlen >= 1 ? '=' : b64chars.charAt(ord & 63)
+        ];
 
-    document.getElementById("dt2ts").onclick = function () {
-        try {
-            let idt = document.getElementById("input-date")
-            let ots = document.getElementById("output-timestamp")
-            ots.value = Math.round((new Date(idt.value)).valueOf() / 1000).toString();
-        } catch (e) {
-            alert(e)
+        return chars.join('');
+    };
+    const btoa = global.btoa && typeof global.btoa == 'function'
+        ? (b) => global.btoa(b) : (b) => {
+            if (b.match(/[^\x00-\xFF]/)) throw new RangeError(
+                'The string contains invalid characters.'
+            );
+            return b.replace(/[\s\S]{1,3}/g, cb_encode);
+        };
+    const _encode = (u) => btoa(utob(String(u)));
+    const mkUriSafe = (b64) => b64.replace(/[+\/]/g, (m0) => {
+        m0 === '+' ? '-' : '_'
+    }).replace(/=/g, '');
+    const encode = (u, urisafe) => urisafe ? mkUriSafe(_encode(u)) : _encode(u);
+    const encodeURI = (u) => encode(u, true);
+    let fromUint8Array;
+    if (global.Uint8Array) fromUint8Array = (a, urisafe) => {
+        let b64 = '';
+        for (let i = 0, l = a.length; i < l; i += 3) {
+            const a0 = a[i];
+            const a1 = a[i + 1];
+            const a2 = a[i + 2];
+            const ord = a0 << 16 | a1 << 8 | a2;
+            b64 += b64chars.charAt(ord >>> 18)
+                + b64chars.charAt((ord >>> 12) & 63)
+                + (typeof a1 != 'undefined'
+                    ? b64chars.charAt((ord >>> 6) & 63) : '=')
+                + (typeof a2 != 'undefined'
+                    ? b64chars.charAt(ord & 63) : '=');
         }
-    }
+        return urisafe ? mkUriSafe(b64) : b64;
+    };
+    const re_btou = /[\xC0-\xDF][\x80-\xBF]|[\xE0-\xEF][\x80-\xBF]{2}|[\xF0-\xF7][\x80-\xBF]{3}/g;
+    const cb_btou = (cccc) => {
+        switch (cccc.length) {
+            case 4:
+                const cp = ((0x07 & cccc.charCodeAt(0)) << 18)
+                    | ((0x3f & cccc.charCodeAt(1)) << 12)
+                    | ((0x3f & cccc.charCodeAt(2)) << 6)
+                    | (0x3f & cccc.charCodeAt(3));
+                const offset = cp - 0x10000;
+                return (fromCharCode((offset >>> 10) + 0xD800)
+                    + fromCharCode((offset & 0x3FF) + 0xDC00));
+            case 3:
+                return fromCharCode(
+                    ((0x0f & cccc.charCodeAt(0)) << 12)
+                    | ((0x3f & cccc.charCodeAt(1)) << 6)
+                    | (0x3f & cccc.charCodeAt(2))
+                );
+            default:
+                return fromCharCode(
+                    ((0x1f & cccc.charCodeAt(0)) << 6)
+                    | (0x3f & cccc.charCodeAt(1))
+                );
+        }
+    };
+    const btou = (b) => b.replace(re_btou, cb_btou);
+    const cb_decode = (cccc) => {
+        const len = cccc.length;
+        const padlen = len % 4;
 
-    let stop = false;
-    document.getElementById("stop").onclick = function () {
-        stop = !stop;
-        switchBtn()
-        tick();
-    }
-    document.getElementById("continue").onclick = function () {
-        stop = !stop;
-        switchBtn()
-        tick();
-    }
+        const n = (len > 0 ? b64tab[cccc.charAt(0)] << 18 : 0)
+            | (len > 1 ? b64tab[cccc.charAt(1)] << 12 : 0)
+            | (len > 2 ? b64tab[cccc.charAt(2)] << 6 : 0)
+            | (len > 3 ? b64tab[cccc.charAt(3)] : 0);
 
-    function switchBtn() {
-        let stp = document.getElementById("stop");
-        let cnt = document.getElementById("continue")
-        if (stp.style.display !== "block") {
-            stp.style.display = "block";
-            cnt.style.display = "none";
-        } else {
-            stp.style.display = "none";
-            cnt.style.display = "block";
-        }
-    }
-    window.onload = function () {
-        try {
-            tick()
-            let now = new Date()
-            document.getElementById("input-timestamp").value = Math.round((new Date()).valueOf() / 1000).toString();
-            document.getElementById("input-date").value = now.getFullYear() + "-" + now.getMonth() + "-" + now.getDay() + " " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
-        } catch (e) {
-            console.log(e)
-        }
-    }
+        const chars = [
+            fromCharCode(n >>> 16),
+            fromCharCode((n >>> 8) & 0xff),
+            fromCharCode(n & 0xff)
+        ];
 
-    function tick() {
-        document.getElementById("timestamp-now").innerText = Math.round((new Date()).valueOf() / 1000).toString();
-        if (!stop) {
-            setTimeout("tick()", 1000)
-        }
+        chars.length -= [0, 0, 2, 1][padlen];
+        return chars.join('');
+    };
+    const _atob = global.atob && typeof global.atob == 'function' ? (a) => global.atob(a) : (a) => a.replace(/\S{1,4}/g, cb_decode);
+    const atob = (a) => _atob(String(a).replace(/[^A-Za-z0-9\+\/]/g, ''));
+    const _decode = (a) => btou(_atob(a));
+    const _fromURI = (a) => String(a).replace(/[-_]/g, m0 => m0 == '-' ? '+' : '/').replace(/[^A-Za-z0-9\+\/]/g, '');
+    const decode = (a) => _decode(_fromURI(a));
+    let toUint8Array;
+    if (global.Uint8Array) toUint8Array = (a) => Uint8Array.from(atob(_fromURI(a)), (c) => c.charCodeAt(0));
+    const noConflict = () => {
+        const Base64 = global.Base64;
+        global.Base64 = _Base64;
+        return Base64;
+    };
+    global.Base64 = {
+        VERSION: version,
+        atob,
+        btoa,
+        fromBase64: decode,
+        toBase64: encode,
+        utob,
+        encode,
+        encodeURI,
+        btou,
+        decode,
+        noConflict,
+        fromUint8Array,
+        toUint8Array
+    };
+    if (typeof Object.defineProperty === 'function') {
+        const noEnum = (v) => ({
+            value: v,
+            enumerable: false,
+            writable: true,
+            configurable: true
+        });
+        global.Base64.extendString = () => {
+            Object.defineProperty(
+                String.prototype, 'fromBase64', noEnum(function () {
+                    return decode(this)
+                }));
+            Object.defineProperty(
+                String.prototype, 'toBase64', noEnum(function (urisafe) {
+                    return encode(this, urisafe)
+                }));
+            Object.defineProperty(
+                String.prototype, 'toBase64URI', noEnum(function () {
+                    return encode(this, true)
+                }));
+        };
     }
-} catch (e) {
-    console.log(e)
-}
-
-try {
-    document.getElementById("url-enc").onclick = () => {
-        document.getElementById("input-content").value = encodeURIComponent(document.getElementById("input-content").value);
+    if (global['Meteor']) { // Meteor.js
+        Base64 = global.Base64;
     }
-    document.getElementById("url-dec").onclick = () => {
-        document.getElementById("input-content").value = decodeURIComponent(document.getElementById("input-content").value);
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports.Base64 = global.Base64;
+    } else if (typeof define === 'function' && define.amd) {
+        define([], () => global.Base64);
     }
-    document.getElementById("base64-enc").onclick = () => {
-        document.getElementById("input-content").value = (new base64()).encode(document.getElementById("input-content").value);
-    }
-    document.getElementById("base64-dec").onclick = () => {
-        document.getElementById("input-content").value = (new base64()).decode(document.getElementById("input-content").value);
-    }
-    document.getElementById("md5sum").onclick = () => {}
-
-    class base64 {
-        constructor() {
-            this._keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-        }
-        encode(e) {
-            let t = "";
-            let n, r, i, s, o, u, a;
-            let f = 0;
-            e = this._utf8_encode(e);
-            while (f < e.length) {
-                n = e.charCodeAt(f++);
-                r = e.charCodeAt(f++);
-                i = e.charCodeAt(f++);
-                s = n >> 2;
-                o = (n & 3) << 4 | r >> 4;
-                u = (r & 15) << 2 | i >> 6;
-                a = i & 63;
-                if (isNaN(r)) {
-                    u = a = 64
-                } else if (isNaN(i)) {
-                    a = 64
-                }
-                t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a)
-            }
-            return t
-        }
-        decode(e) {
-            let t = "";
-            let n, r, i;
-            let s, o, u, a;
-            let f = 0;
-            e = e.replace(/[^A-Za-z0-9+/=]/g, "");
-            while (f < e.length) {
-                s = this._keyStr.indexOf(e.charAt(f++));
-                o = this._keyStr.indexOf(e.charAt(f++));
-                u = this._keyStr.indexOf(e.charAt(f++));
-                a = this._keyStr.indexOf(e.charAt(f++));
-                n = s << 2 | o >> 4;
-                r = (o & 15) << 4 | u >> 2;
-                i = (u & 3) << 6 | a;
-                t = t + String.fromCharCode(n);
-                if (u !== 64) {
-                    t = t + String.fromCharCode(r)
-                }
-                if (a !== 64) {
-                    t = t + String.fromCharCode(i)
-                }
-            }
-            t = this._utf8_decode(t);
-            return t
-        }
-        _utf8_encode(e) {
-            e = e.replace(/rn/g, "n");
-            let t = "";
-            for (let n = 0, m = e.length; n < m; n++) {
-                let r = e.charCodeAt(n);
-                if (r < 128) {
-                    t += String.fromCharCode(r)
-                } else if (r > 127 && r < 2048) {
-                    t += String.fromCharCode(r >> 6 | 192);
-                    t += String.fromCharCode(r & 63 | 128)
-                } else {
-                    t += String.fromCharCode(r >> 12 | 224);
-                    t += String.fromCharCode(r >> 6 & 63 | 128);
-                    t += String.fromCharCode(r & 63 | 128)
-                }
-            }
-            return t
-        }
-        _utf8_decode(e) {
-            let t = "";
-            let n = 0;
-            let r, c1, c2 = 0;
-            while (n < e.length) {
-                r = e.charCodeAt(n);
-                if (r < 128) {
-                    t += String.fromCharCode(r);
-                    n++
-                } else if (r > 191 && r < 224) {
-                    c2 = e.charCodeAt(n + 1);
-                    t += String.fromCharCode((r & 31) << 6 | c2 & 63);
-                    n += 2
-                } else {
-                    c2 = e.charCodeAt(n + 1);
-                    let c3 = e.charCodeAt(n + 2);
-                    t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63);
-                    n += 3
-                }
-            }
-            return t
-        }
-    }
-} catch (e) {
-    console.log(e)
-}
+    return {Base64: global.Base64}
+});
 
 function copyToClipBord(text) {
     let handler = (event) => {
@@ -1157,12 +1047,6 @@ function isHex(x) {
     return '0123456789ABCDEFabcdef'.includes(x);
 }
 
-window.color = color;
-
-document.getElementById("input-color").oninput = () => {
-    convertColor()
-}
-
 function convertColor() {
     let color = new window.color(document.getElementById("input-color").value, document.getElementsByClassName("display-color")[0]);
 
@@ -1176,4 +1060,164 @@ function convertColor() {
     document.getElementById("cmyk").value = color.toCmykString();
     document.getElementById("ncol").value = color.toNcolString();
     document.getElementById("ncola").value = color.toNcolaString();
+}
+
+class Pomodoro {
+    constructor(wtime = 25, sbtime = 5, lbtime = 15) {
+        this.wtime = wtime
+        this.sbtime = sbtime
+        this.lbtime = lbtime
+        this.status = "work"
+        this.time = 0
+        this.stop = false
+        this.stuff = ""
+    }
+
+    setWorkTime(status, value) {
+        if (status === this.status) {
+            document.getElementById("timer-string").innerText = this.msToms(value * 60 * 1000)
+        }
+        if (status === "work") {
+            this.wtime = value
+        }
+        if (status === "sbreak") {
+            this.sbtime = value
+        }
+        if (status === "lbreak") {
+            this.lbtime = value
+        }
+    }
+
+    pomodorobtn() {
+        if (this.status !== "work") {
+            this.stuff = "Time to work"
+            document.title = this.wtime.toString() + " - " + this.stuff;
+            document.body.className = "work-bg";
+            document.getElementById("work").classList.add("clock-btn-active");
+            document.getElementById("sbreak").classList.remove("clock-btn-active");
+            document.getElementById("lbreak").classList.remove("clock-btn-active");
+            document.getElementById("start").classList.add("wstart")
+            document.getElementById("start").classList.remove("sbstart")
+            document.getElementById("start").classList.remove("lbstart")
+            document.getElementById("start").innerText = "START";
+            document.getElementById("timer-string").innerText = this.msToms(this.wtime * 60 * 1000);
+            this.status = "work";
+            this.stop = true;
+            clearTimeout(timeCounter);
+        } else {
+        }
+    }
+
+    shortbreakbtn() {
+        if (this.status !== "sbreak") {
+            this.stuff = "Time for a break"
+            document.title = this.sbtime.toString() + " - " + this.stuff;
+            document.body.className = "short-bg";
+            document.getElementById("work").classList.remove("clock-btn-active");
+            document.getElementById("sbreak").classList.add("clock-btn-active");
+            document.getElementById("lbreak").classList.remove("clock-btn-active");
+            document.getElementById("start").classList.add("sbstart")
+            document.getElementById("start").classList.remove("wstart")
+            document.getElementById("start").classList.remove("lbstart")
+            document.getElementById("start").innerText = "START";
+            document.getElementById("timer-string").innerText = this.msToms(this.sbtime * 60 * 1000);
+            this.status = "sbreak";
+            this.stop = true;
+            clearTimeout(timeCounter);
+        } else {
+        }
+    }
+
+    longbreakbtn() {
+        if (this.status !== "lbreak") {
+            this.stuff = "Time for a break"
+            document.title = this.lbtime.toString() + " - " + this.stuff;
+            document.body.className = "long-bg";
+            document.getElementById("work").classList.remove("clock-btn-active");
+            document.getElementById("sbreak").classList.remove("clock-btn-active");
+            document.getElementById("lbreak").classList.add("clock-btn-active");
+            document.getElementById("start").classList.add("lbstart")
+            document.getElementById("start").classList.remove("sbstart")
+            document.getElementById("start").classList.remove("wstart")
+            document.getElementById("start").innerText = "START";
+            document.getElementById("timer-string").innerText = this.msToms(this.lbtime * 60 * 1000);
+            this.status = "lbreak";
+            this.stop = true;
+            clearTimeout(timeCounter);
+        } else {
+        }
+    }
+
+    pomodorostart() {
+        if (this.status === "work") {
+            this.time = this.wtime
+        }
+        if (this.status === "sbreak") {
+            this.time = this.sbtime
+        }
+        if (this.status === "lbreak") {
+            this.time = this.lbtime
+        }
+        if (this.stop !== false) {
+            this.countTime(this.updateTime)
+        }
+        toggle()
+    }
+
+    updateTime(ms) {
+        let redT = this.msToms(ms)
+        document.getElementById("timer-string").innerText = redT;
+        document.title = redT + " - " + this.stuff;
+    }
+
+    msToms(ms) {
+        return parseInt((ms / 60000).toString()).toString().padStart(2, "0") + ":" + parseInt((ms % 60000 / 1000).toString()).toString().padStart(2, "0")
+    }
+
+    toggle() {
+        if (document.getElementById("start").innerText === "STOP") {
+            document.getElementById("start").innerText = "START";
+            this.stop = true;
+        } else {
+            document.getElementById("start").innerText = "STOP";
+            this.stop = false;
+        }
+    }
+
+    countTime(fn, interval = 1000) {
+        let ms = this.time * 60 * 1000;  //从服务器和活动开始时间计算出的时间差，这里测试用50000ms
+        let count = 0;
+        let startTime = new Date().getTime();
+        if (ms >= 0) {
+            timeCounter = setTimeout(countDownStart, interval);
+        }
+
+        function countDownStart() {
+            count++;
+            let diff = new Date().getTime() - (startTime + count * interval);
+            let nextTime = interval - diff;
+
+            if (nextTime < 0) {
+                nextTime = 0
+            }
+            ms -= interval;
+            if (this.stop) {
+            } else {
+                if (ms >= 0) {
+                    fn(ms)
+                    timeCounter = setTimeout(countDownStart, nextTime);
+                    this.time -= 1;
+                } else {
+                    clearTimeout(timeCounter);
+                    if (this.status === "work") {
+                        document.getElementById("sbreak").click()
+                    } else if (this.status === "sbreak") {
+                        document.getElementById("work").click()
+                    } else if (this.status === "lbreak") {
+                        document.getElementById("work").click()
+                    }
+                }
+            }
+        }
+    }
 }
